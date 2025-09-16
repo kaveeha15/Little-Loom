@@ -1,0 +1,96 @@
+.reviewContainer{
+   display: flex; 
+   justify-content: center;
+   flex-direction:column;
+   color: black;
+   background-color:#FFCADD;
+   align-items: center;
+   width: 100vw;
+   height: 100vh;
+   
+  
+}
+.reviewForm{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border:2px solid rgb(196, 188, 188);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    height: 400px;
+}
+.heading h2{
+    font-size: 25px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  padding:25px;
+  background-color:white;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  width: 350px;
+  height: 200px;
+  transition: border-color 0.3s ease;
+}
+
+.upload:hover {
+  border-color: #999;
+}
+
+.upload input {
+  cursor: pointer;
+
+
+}
+
+
+.reviewsInput{
+    display: flex;
+    flex-direction: column;
+   margin: 10px;
+    width: 400px;
+    border-radius: 10px;
+    gap:10px;
+
+}
+.reviewsInput input{
+     border-radius: 10px;
+      border-width: 0;
+     padding: 10px;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.reviewsInput textarea{
+    border-radius: 10px;
+     border-width: 0;
+    height:100px;
+    padding: 10px;
+     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.submit{
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+
+ background-color:#C2185B;
+}
+.submit p{
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+.submit:hover{
+    cursor: pointer;
+   
+}
+#tSize{
+  width: 340px;
+}
+
+
+

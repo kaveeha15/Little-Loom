@@ -1,0 +1,99 @@
+.orderContainer{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FFCADD;
+    width: 100vw;
+    height: 100vh;
+  
+}
+.orderForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border:2px solid rgb(196, 188, 188);
+    border-radius: 10px;
+    height: 630px;
+    padding:20px;
+}
+.orderHeading{
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.orderDetails{
+    display: flex;
+    background-color: #C2185B;
+}
+.billingDetails{
+    display:flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+
+}
+.billingDetails h3{
+    font-size: 20px;
+}
+.billingDetails input{
+    margin: 10px;
+    font-size: 12px;
+    border-radius:5px;
+    border-width: 0;
+    padding: 7px;
+}
+.inline{
+    display: inline;
+}
+.payMethod { 
+ 
+  border-radius: 10px;
+  width: 350px;
+  font-family: Arial, sans-serif;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content:space-between; 
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.label:hover {
+  background: #ffe6f0;
+}
+
+.label input{
+  margin-right:20px;
+  accent-color: #ff4081; 
+  cursor: pointer;
+  transform: scale(2.0);
+}
+
+.label img {
+  height: 28px;
+}
+.label span {
+  flex: 1; 
+}
+
+.checkout{
+    width: 200px;
+    border-radius: 10px;
+    background-color:#C2185B;
+}
+.checkout p{
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+.checkout:hover{
+    cursor: pointer;  
+}
+
