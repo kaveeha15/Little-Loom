@@ -1,0 +1,100 @@
+/* Container for header */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 50px; /* smaller padding to reduce header size */
+  background-color: #fff; /* white background */
+  color: #000; /* black font color */
+  font-family:"kaisei opti";
+}
+
+/* Left side */
+.left-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* smaller gap between texts */
+  align-items: center;
+}
+
+/* Main header text */
+.section {
+  font-size: 35px; /* smaller header */
+  font-weight: 600;
+  line-height: 1.2;
+  color: #000;
+  margin: 0;
+}
+
+/* Subheader text */
+.section2 {
+  font-size: 25px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+
+/* Button container */
+.element {
+  margin-top: 15px;
+}
+
+/* Shop Now button */
+.shopnowBut {
+  background-color: #f7a8ae; /* pink/purple button */
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.shopnowBut:hover {
+  background-color: #EAB3B8;
+}
+
+/* Right side */
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Header image */
+.picture {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column-reverse;
+    padding: 20px 20px;
+    text-align: center;
+  }
+
+  .right-side {
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  .section {
+    font-size: 18px;
+  }
+
+  .section2 {
+    font-size: 14px;
+  }
+
+  .shopnowBut {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+}

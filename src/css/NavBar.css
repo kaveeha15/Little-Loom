@@ -1,0 +1,165 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background-color: #fff;
+  font-family: 'Helvetica Neue', sans-serif;
+  position: relative;
+  border-bottom: 1px solid #FFC1CC;
+}
+
+/* Logo */
+.logo {
+  height: 90px;
+  cursor: pointer;
+}
+
+/* Navigation links container */
+.navul {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navli {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navli:hover {
+  color: #C2185B;
+}
+
+.navhr {
+  width: 100%;
+  height: 2px;
+  background-color: #C2185B;
+  border: none;
+  margin-top: 5px;
+  visibility: hidden;
+}
+
+
+
+/* Right actions (SIGN IN + wishlist) */
+.right-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Sign In button */
+.loginButton {
+  background-color: #C2185B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #e33e80;
+}
+
+/* Wishlist icon */
+.wishlistlogo {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.navlink {
+  text-decoration: none; /* removes underline */
+  color: inherit; /* keeps link color */
+}
+
+.navlink.active {
+  text-decoration: none; /* ensure active link also has no underline */
+  color: #C2185B; /* optional: highlight active page with color */
+}
+.navlink {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  padding-bottom: 5px; /* space for underline */
+}
+
+/* Active link underline */
+.navlink.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #C2185B;
+}
+ 
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;   /* stack logo, nav, actions */
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  .logo {
+    height: 60px; /* smaller logo */
+    margin-bottom: 10px;
+  }
+
+  .navul {
+    position: static;  /* remove absolute center */
+    transform: none;
+    gap: 20px;  /* closer spacing */
+    flex-wrap: wrap; /* allow wrap if too many items */
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .navli {
+    font-size: 12px;
+  }
+
+  .loginButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .wishlistlogo {
+    height: 22px;
+    width: 22px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navul {
+    gap: 12px;
+  }
+
+  .navli {
+    font-size: 11px;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .loginButton {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}

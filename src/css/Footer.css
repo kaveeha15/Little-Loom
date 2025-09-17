@@ -1,0 +1,101 @@
+/* Footer main container */
+.footer {
+  color: #333;
+  padding: 40px 20px 20px 20px;
+  font-family:Newsreader;
+  border-top: 1px solid #FFC1CC;
+}
+
+/* Footer grid */
+.footer-container {
+  display: flex;
+  justify-content: space-around; 
+  flex-wrap: wrap; 
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 220px;
+}
+
+
+/* Each column */
+.footer-column {
+  flex: 1;
+  min-width: 250px;
+
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #C2185B; /* brand color */
+}
+
+.footer-column p,
+.footer-column a {
+  font-size: 14px;
+  color: #555;
+  margin: 6px 0;
+  text-decoration: none;
+  display: block;
+}
+
+.footer-column a:hover {
+  color: #C2185B;
+}
+
+/* Logo */
+.littleloom {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+/* Contact icons */
+.email-img,
+.phone-img {
+  height: 18px;
+  width: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 55px;
+}
+
+.SMedia {
+  width: 30px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.SMedia:hover {
+  transform: scale(1.1);
+}
+
+/* Bottom bar */
+.footer-bottom {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid #FFC1CC;
+  padding-top: 15px;
+}
+
+/* ----------- Responsive ----------- */
+@media screen and (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
