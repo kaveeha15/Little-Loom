@@ -1,0 +1,78 @@
+.addProductContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color:#FFCADD ;
+    width: 100vw;
+    height:100vh ;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;   
+}
+.addProductForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border:2px solid rgb(196, 188, 188);
+  border-radius: 10px;
+  width: 400px;
+}
+.addProductForm h2{
+    font-size: 25px;
+    font-family:unset;
+}
+.addImg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  padding:40px;
+  background-color:white;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  width: 50%;
+  transition: border-color 0.3s ease;
+}
+.addImg:hover{
+    border-color: #999;
+}
+.addImg input{
+ cursor: pointer;
+}
+.addProductInput{
+    display: flex;
+    align-items:left;
+    justify-content: center;
+    flex-direction: column;  
+}
+.addProductInput label{
+    margin: 10px;
+}
+.addProductInput input,textarea{
+    border-radius:5px;
+    border-width: 0;
+     width: 350px;
+     height: 30px;
+}
+.addProductInput textarea{
+     height:80px;
+}
+
+.addBtn{
+    width: 350px;
+    margin: 20px;
+    border-radius: 15px;
+ background-color:#C2185B;
+}
+.addBtn p{
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-family:unset;
+    font-weight: bold;
+}
+.addBtn:hover{
+    cursor: pointer;
+    
+}
