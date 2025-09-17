@@ -19,6 +19,7 @@ const OrderPlacement = () => {
                     <input type="text" name="pNo" placeholder="Phone*" />
                     <input type="text" name="email" placeholder="Email address*" id='tSize'  />
                 </div>
+                
                 <div className="payMethod">
                     <div className="label"><input type="radio" name="bank"  /> <span> Direct Bank Transfer </span> <img src={bank} alt="Bank"/></div>
                     <div className="label"><input type="radio" name="cod" /><span>Cash on Delivery</span><img src={cod} alt="COD"/></div> 
