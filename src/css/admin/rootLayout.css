@@ -1,0 +1,78 @@
+
+.top{
+    display:flex;
+   justify-content:space-between;
+   align-items: center;
+}
+.top img{    
+margin-left: 25px;
+width:130px;
+height: 160px;
+   
+}
+.top h1{
+    display:flex;
+   align-items: center;
+    font-size: 35px;
+    color: #C2185B;
+}
+
+.signOutBtn{
+    display: flex; 
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color:#C2185B;
+}
+.signOutBtn p{
+    display: flex;
+    color: white;
+    justify-content: center;
+}
+.signOutBtn:hover{
+    cursor: pointer;  
+}
+hr {
+  border: none;
+  height: 2px;
+  background-color: #FFC1CC; 
+}
+.btnSet{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     margin: 20px;
+     padding: 15px;
+     border: 1px solid whitesmoke;
+    border-radius: 15px;
+    box-shadow:   0 4px 10px rgba(0,0,0,0.1);
+    width: 280px;
+    height: 100px;
+}
+.box p{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+     color: #F25081;
+    font-size: 30px;
+    font-family: monospace;
+     font-weight: 900;
+}
+.box img{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: 8px;
+}
+.box:hover{
+    cursor: pointer;
+}
