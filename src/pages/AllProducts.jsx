@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const AllProducts = () => {
   const navigate = useNavigate();
   const { category } = useParams();
+  const [activeCategory, setActiveCategory] = useState(category || "");
   const [filteredProducts, setFilteredProducts] = useState(product);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -28,6 +29,7 @@ const AllProducts = () => {
   }, [category, searchQuery]);
 
   const handleSpecialityClick = (category) => {
+    setActiveCategory(category);
     navigate(`/products/${category}`);
   };
 
@@ -40,37 +42,49 @@ const AllProducts = () => {
         <div className="filter-box">
           <div className="filter-box2">
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Clothing & Accessories" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Clothing & Accessories")}
             >
               Clothing & Accessories
             </p>
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Diapers & Hygiene" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Diapers & Hygiene")}
             >
               Diapers & Hygiene
             </p>
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Feeding Essentials" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Feeding Essentials")}
             >
               Feeding Essentials
             </p>
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Nursery & Furniture" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Nursery & Furniture")}
             >
               Nursery & Furniture
             </p>
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Health & Safety" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Health & Safety")}
             >
               Health & Safety
             </p>
             <p
-              className="pro-type"
+              className={`pro-type ${
+                activeCategory === "Toys & Learning" ? "active" : ""
+              }`}
               onClick={() => handleSpecialityClick("Toys & Learning")}
             >
               Toys & Learning
