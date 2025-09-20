@@ -31,6 +31,11 @@ import boyCloths2 from './Newborn Clothes boy 2 .jpg'
 import rashCream from './Rash Creams 2.jpeg'
 import babyMonitor from './Baby Monitors 1.jpeg'
 import searchIcon from './search.png'
+import backIcon from './backicon.png'
+import cancelicon from './canselicon.png'
+import addicon from './addicon.png'
+import removeicon from './removeicon.png'
+import removeCart from './removeCart.jpeg'
 
 
 
@@ -69,6 +74,11 @@ export const assets={
     rashCream,
     babyMonitor,
     searchIcon,
+    backIcon,
+    cancelicon,
+    addicon,
+    removeCart,
+    removeicon,
     
 }
 
