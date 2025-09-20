@@ -38,3 +38,19 @@ function App() {
   )
 }
 export default App
+
+
+
+ /* <Router>
+        <nav>
+          <Link to='/'>All Products</Link>
+           <Link to='/totalOrders'>Total Orders</Link>
+            <Link to='/totalUsers'>Total Users</Link>
+        </nav>
+        <Routes>
+          <Route path='/'>All Products</Route>
+          <Route path='/totalOrders'>Total Orders</Route>
+          <Route path='/totalUsers'>Total Users</Route>
+        </Routes>
+      </Router>*/
+      
