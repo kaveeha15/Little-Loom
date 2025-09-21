@@ -11,7 +11,6 @@
   border-radius: 20px;
   width: 400px;
 }
-
 .searchBar input {
   flex: 1;
   border: none;
@@ -33,6 +32,66 @@
   align-items: center;
   justify-content: center;
   width: 200px;
+  height: 50px;
+  text-decoration: none;
+  
+}
+.divContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.productHeading{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFCADD;
+  height:40px;
+  width: 800px;
+  gap:20px;
+
+}
+.pItem h4{
+  display: flex;
+  justify-content: center;
+  
+}
+.productContainer{
+ text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 900px;
+}
+.pItem{
+  display: flex;
+  width: 50px;
+  padding: 10px;
+}
+.pItemImg{
+  display: flex;
+ width: 70px;
+  height: 70px;
+}
+.pItemName{
+  display: flex;
+  width:250px ;
+}
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+   border-bottom: 1px solid #FFC1CC;
+}
+.Aaction {
+  display: flex;
+  gap: 10px;
+ width: 40px;
+ height: 40px;
+  justify-content: center; 
   
 }
 

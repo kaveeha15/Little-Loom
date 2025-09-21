@@ -1,0 +1,13 @@
+.itemTot{
+     display:flex;
+     margin-top: 0;
+     border-top:  1px solid #FFC1CC;
+      border-bottom: 1px solid #FFC1CC;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.itemTot img{
+    width: 100px;
+}
+.orderContainer div{
+    padding: 10px;
+}

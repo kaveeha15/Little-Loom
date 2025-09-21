@@ -56,10 +56,14 @@ hr {
     width: 280px;
     height: 100px;
 }
+.navLink{
+    text-decoration: none;
+}
 .box p{
      display: flex;
     align-items: center;
     justify-content: center;
+    
      color: #F25081;
     font-size: 30px;
     font-family: monospace;
