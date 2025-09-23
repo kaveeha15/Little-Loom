@@ -1,13 +1,21 @@
+.orderContainer{
+  display: flex;
+ justify-content: flex-start;
+ margin:20px;
+}
+.orderContainer div{
+    padding:10px;
+
+}
 .itemTot{
      display:flex;
-     margin-top: 0;
-     border-top:  1px solid #FFC1CC;
-      border-bottom: 1px solid #FFC1CC;
+     justify-content: center;
+     align-items: center;
+     border-top:2px solid #FFC1CC;
+    
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .itemTot img{
     width: 100px;
 }
-.orderContainer div{
-    padding: 10px;
-}
+

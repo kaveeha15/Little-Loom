@@ -36,7 +36,7 @@ const TotalOrders = () => {
     return ( 
       <>
     
-      <div className="middle">
+     <div className="middle">
           <div className="searchBar"><input placeholder="Search"/><img src={search}></img></div>
       </div>
       <div className="orderContainer">

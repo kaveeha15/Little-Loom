@@ -7,8 +7,11 @@
 .top img{    
 margin-left: 25px;
 width:130px;
-height: 160px;
+height: 170px;
    
+}
+.top img:hover{
+    cursor: pointer;
 }
 .top h1{
     display:flex;

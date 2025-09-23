@@ -26,10 +26,16 @@ const TotalUsers = () => {
 <>
 <div className="userContainer">
     {
-        totalUsers.map(user=>(
+        totalUsers.map((user,index)=>(
         <div className="user" key={index}>
             <div className="uImg"><img src={user.image}/></div>
-            <div className="userData">{user.name},{user.email},{user.address},{user.telNo},{user.noOfOrders}</div>
+            <div className="userData">
+                <div>{user.name}</div>
+                <div>{user.email}</div>
+                <div>{user.address}</div>
+                <div>{user.telNo}</div>
+                <div>{user.noOfOrders}</div>
+            </div>  
         </div>
 
 
@@ -43,3 +49,4 @@ const TotalUsers = () => {
 }
  
 export default TotalUsers;
+

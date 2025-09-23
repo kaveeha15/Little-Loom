@@ -1,12 +1,31 @@
-.userContainer{
-    display: flex;
-}
+
 .user{
-    display: flex;
+     display:flex;
+  
+     border-top:  1px solid #FFC1CC;
+      border-bottom: 1px solid #FFC1CC;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.uImg{
+.user img{
     display: flex;
+    width: 150px;
+    height: 200px;
+    margin: 10px;
 }
 .userData{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.userData div{
+   padding: 10px; 
+}
+
+.userContainer{
+    display: flex;
+     justify-content: center;
+   align-items:center;
+   margin: 10px;
+   gap:80px;
+   
 }
