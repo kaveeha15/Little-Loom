@@ -2,39 +2,26 @@ import { useState } from "react";
 import user1 from '../../assets/images/user1.jpg'
 import user2 from '../../assets/images/user2.jpg'
 import'../../css/admin/totalUsers.css'
+import { useEffect } from "react";
+import useFetch from "../../hooks/useFetch";
 const TotalUsers = () => {
-    const [totalUsers,setTotalUsers]=useState([
-        {
-            image:user1,
-            name:"Chamika Dilhani ",
-            email:"chamikadilhani@gmail.com",
-            address:"Deegala,Maramba,Akuressa",
-            telNo:"0778428666",
-            noOfOrders:1
-        },
-         {
-            image:user2,
-            name:"Kavisha Nimanshi ",
-            email:"kavishanimanshi@gmail.com",
-            address:"Malimbada,Palatuwa,Mathara",
-            telNo:"0778414225",
-            noOfOrders:4
-        }
-
-    ])
+   const{fetchDbData,isLoading,error,data}=useFetch()
+   useEffect(()=>{
+    fetchDbData('totalUsers')
+   },[])
     return ( 
 <>
 <div className="userContainer">
     {
-        totalUsers.map((user,index)=>(
+        isLoading?<h2>Loading...</h2>:data.map((user,index)=>(
         <div className="user" key={index}>
-            <div className="uImg"><img src={user.image}/></div>
+            <div className="uImg">{user.image}</div>
             <div className="userData">
-                <div>{user.name}</div>
+                <div>{user.Name}</div>
                 <div>{user.email}</div>
-                <div>{user.address}</div>
-                <div>{user.telNo}</div>
-                <div>{user.noOfOrders}</div>
+                <div>{user.Address}</div>
+                <div>{user.phoneNumber}</div>
+                <div>{user.noOfitems}</div>
             </div>  
         </div>
 

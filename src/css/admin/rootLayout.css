@@ -83,3 +83,7 @@ hr {
 .box:hover{
     cursor: pointer;
 }
+
+.box.active {
+    background-color: #FFCADD; 
+}

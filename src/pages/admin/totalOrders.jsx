@@ -2,36 +2,16 @@ import search from '../../assets/images/search.png'
 import orders from '../../assets/images/order.jpg'
 import '../../css/admin/allProducts.css';
 import '../../css/admin/totalOrders.css'
-import { useState } from "react";
+import { useEffect} from 'react';
+import useFetch from '../../hooks/useFetch';
+import { db } from "../../config/firebase";
 const TotalOrders = () => {
-    const[totalOrders,setTotalOrders]=useState([
-        {
-        
-            id:1,
-            pName:"Floral Embroidered Baby Romper Set,Soft toy Elephant",
-            items:5,
-            price:"Rs.9600",
-            address:"Deegala,Maramba,Akuressa",
-            telNo:"0778428666",
-            method:"COD",
-            date: "10/10/2025",
-            status:"processing"
+    const{fetchDbData,isLoading,error,data}=useFetch();
+   
 
-        },
-         {
-            id:2,
-            pName:"Floral Embroidered Baby Romper Set,Soft toy Elephant",
-            items:5,
-            price:"Rs.9600",
-            address:"Deegala,Maramba,Akuressa",
-            telNo:"0778428666",
-            method:"COD",
-            date: "10/10/2025",
-            status:"processing"
-
-        },
-
-    ])
+    useEffect(()=>{
+        fetchDbData('totalOrders')
+    },[])
 
     return ( 
       <>
@@ -41,24 +21,34 @@ const TotalOrders = () => {
       </div>
       <div className="orderContainer">
         {
-            totalOrders.map(order=>(
+           isLoading?<h2>Loading...</h2>:data.map((order,index)=>(
                 <div className="itemTot" key={order.id}>
                        
                         <div><img src={orders}/></div>
-                        <div className="oItem1">
-                        <div>{order.id}</div>
-                        <div>{order.pName}</div>
-                        <div>{order.items}</div>
+                        <div className="oItem">
+                        <div>id:{index+1}</div>
+                        <div>{order.Orders}</div>
+                        <div>items: {order.Items}</div>
                         </div>
-                        <div className="oItem2">
-                        <div >{order.price}</div>
-                        <div >{order.address}</div>
-                        <div>{order.telNo}</div>
+                        <div className="oItem">
+                        <div >{order.totalPrice}</div>
+                        <div >{order.Address}</div>
+                        <div>{order.phoneNumber}</div>
+                          <div>{order.email}</div>
                         </div>
-                        <div className="oItem3">
-                        <div>{order.method}</div>
-                        <div>{order.date}</div>
-                        <div>{order.status}</div>
+                        <div className="oItem">
+                        <div>{order.Method}</div>
+                        <div>{order.Date?.toDate().toLocaleString()}</div>
+                      
+                        <div><select >
+                          <option value="process">Process</option>
+                          <option value="ship">Ship</option>
+                          <option value="delivered">Delivered</option>
+                          <option value="cancel">Cancel</option>
+                          <option value="return">Return</option>
+                        </select>
+                      
+                        </div>
                         </div>
                 </div>
             ))

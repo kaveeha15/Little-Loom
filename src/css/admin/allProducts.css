@@ -50,7 +50,8 @@
   height:40px;
   width: 800px;
   gap:20px;
-
+position:sticky;
+top:0;
 }
 .pItem h4{
   display: flex;
@@ -63,19 +64,20 @@
   flex-direction: column;
   align-self: center;
   max-width: 900px;
+  max-height:500px ;
+  overflow-y: scroll;
 }
 .pItem{
   display: flex;
   width: 50px;
   padding: 10px;
 }
-.pItemImg{
-  display: flex;
- width: 70px;
-  height: 70px;
-}
 .pItemName{
   display: flex;
+  width:250px ;
+}
+.pItemDes{
+   display: flex;
   width:250px ;
 }
 .item{
@@ -92,6 +94,7 @@
  width: 40px;
  height: 40px;
   justify-content: center; 
+  cursor: pointer;
   
 }
 
