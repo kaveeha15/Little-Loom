@@ -10,23 +10,6 @@ const AllProducts = () => {
         <div className="addBtn"><p>Add product</p></div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
     </>
     );
