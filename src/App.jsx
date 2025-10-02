@@ -15,7 +15,15 @@ import UserProfile from './pages/UserProfile'
 import Footer from './Components/Footer'
 
 function App() {
- 
+ const router=createBrowserRouter(createRoutesFromElements(
+    <Route element={<RootLayout/>}>
+       <Route index element={<AllProducts/>}/>
+        <Route path= '/totalOrders' element={<TotalOrders/>}/>
+        <Route path= '/totalUsers' element={<TotalUsers/>}/>
+         <Route path="/addproduct" element={<AddProducts/>} />
+    </Route>
+  ))
+   
   return (
    <BrowserRouter>
      <NavBar/>
