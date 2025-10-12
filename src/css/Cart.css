@@ -108,3 +108,37 @@
 .buyBut:hover {
   background-color: #e91e63; 
 }
+.tool-tip {
+  position: relative;      /* keeps tooltip text relative to the icon */
+  display: inline-block;   /* wrap tightly around the image */
+}
+
+.removeCart-icon {
+  width: 50px;             /* make sure your image has a visible size */
+  height: 50px;
+  cursor: pointer;
+}
+
+.tool-tip-text {
+  visibility: hidden;      
+  opacity: 0;
+  width: max-content;      /* size based on text length */
+  background-color: #fad7de;  
+  color: black;             
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 8px;
+  position: absolute;
+  bottom: 20px;            /* show above the icon */
+  left: 50px;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  /* smooth fade */
+  transition: opacity 0.3s;
+}
+
+.tool-tip:hover .tool-tip-text {
+  visibility: visible;
+  opacity: 1;
+}

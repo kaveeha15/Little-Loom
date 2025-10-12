@@ -14,6 +14,7 @@ import Wishlist from './pages/Wishlist'
 import UserProfile from './pages/UserProfile'
 import Footer from './Components/Footer'
 
+
 function App() {
  
   return (
@@ -31,7 +32,11 @@ function App() {
       <Route path='/wishlist/:id' element={<Wishlist/>}/>
       <Route path='/review' element={<Reviews/>}/>
       <Route path='/productDetails/:id' element={<ProductDetails/>}/>
-       <Route path='/order' element={<OrderPlacement/>}/>
+      <Route path='/order' element={<OrderPlacement/>}/>
+      <Route path='/userProfile' element={<UserProfile/>}/>
+    
+   
+      
      </Routes>
 
      <Footer/>

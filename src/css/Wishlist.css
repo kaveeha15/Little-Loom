@@ -13,6 +13,7 @@
   top: 150px;
   left: 20px;
   border-radius: 15px;
+  
 }
 
 
@@ -34,7 +35,7 @@
 }
 .wishlistbox {
   display: flex;
-  align-items: flex-start; /* image + details aligned top */
+  align-items: flex-start; 
   gap: 20px;
   background-color: #ffd3da;
   border-radius: 12px;
@@ -42,6 +43,7 @@
   max-width: 800px;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .wishlistimg {

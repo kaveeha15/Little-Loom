@@ -1,8 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import '../css/signIn.css'
 const SignIn = () => {
 
 
-
+const navigate=useNavigate()
 
     return ( 
 <div className="signInContainer">
@@ -26,7 +27,7 @@ const SignIn = () => {
         <div className="gText"><h5>Sign In With Google</h5></div>
     </div>
     <div className="signInBtn">
-        <p>Sign In</p>
+        <p   onClick={()=>navigate("/userprofile")}>Sign In</p>
     </div>
 </div>
 <h5 className="loginLink">Create a new account to get started <a href="#">Click here</a></h5>

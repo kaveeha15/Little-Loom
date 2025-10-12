@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { assets, product } from "../assets/assets";
 import "../css/Highlight.css";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const Highlight = () => {
   const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div className="proMenu" >
@@ -41,17 +43,32 @@ const Highlight = () => {
             <div className="boxPadding">
               <p className="pro-name">{item.name}</p>
               <p className="pro-prize">Rs.{item.prize}</p>
-              <div className="tooltip" onClick={(e) => e.stopPropagation()}>
-                <img
-                  className="addCart-img"
-                  src={assets.addCart}
-                  alt="Add to Cart"
-                />
-                <span className="tooltip-text"  onClick={() => {
-                  navigate(`/cart/${item._id}`);
-                  scrollTo(0, 0);
-                }}>Add to Cart</span>
-              </div>
+             <div
+                      className="tooltip"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <img
+                        className="addCart-img"
+                        src={assets.addCart}
+                        alt="Add to Cart"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(item, 1);
+                          navigate("/cart");
+                        }}
+                      />
+
+                      <span
+                        className="tooltip-text"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(item, 1);
+                          navigate("/cart");
+                        }}
+                      >
+                        Add to Cart
+                      </span>
+                    </div>
             </div>
           </div>
         ))}

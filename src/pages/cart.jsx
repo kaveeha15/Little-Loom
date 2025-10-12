@@ -1,48 +1,94 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { assets, product } from "../assets/assets";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets";
+import { CartContext } from "../context/CartContext";
 import "../css/Cart.css";
 
 const Cart = () => {
-  const { id } = useParams();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
 
-  const selectProduct = product.find((item) => item._id === id);
+  if (cartItems.length === 0) {
+    return (
+      <div className="cart-empty">
+        <h2>No products in cart.</h2>
+      </div>
+    );
+  }
+
+  const totalPrice = cartItems.reduce(
+    (acc, item) => acc + item.prize * item.quantity,
+    0
+  );
 
   return (
     <div>
-      <div className="product-Details">
-        <div className="prodetails-Img">
-          <img src={selectProduct.image} alt="" />
-        </div>
-        <div className="pro-Details">
-          <h2 className="pro-Text">Name: {selectProduct.name} </h2>
-          <p className="pro-Text">Prize: Rs.{selectProduct.prize} </p>
-          <p className="pro-Text">In Stock: {selectProduct.stock} </p>
-          <div className="quantity-control">
-            <img className="Q-icon" src={assets.removeicon} alt="Remove one" />
-            <input type="text" value="1" readOnly className="quantity"/>
-            <img className="Q-icon" src={assets.addicon} alt="Add one" />
+      {cartItems.slice().reverse().map((item) => (
+        <div className="product-Details" key={item._id}>
+          <div className="prodetails-Img">
+            <img src={item.image} alt={item.name} />
           </div>
+          <div className="pro-Details">
+            <h2 className="pro-Text">Name: {item.name} </h2>
+            <p className="pro-Text">Price: Rs.{item.prize} </p>
+            <p className="pro-Text">In Stock: {item.stock - item.quantity} </p>
 
-          <div className="tool-tip">
-           <img className="removeCart-icon" src={assets.removeCart} alt="" />
-          <span className="tool-tip-text">Remove from Cart</span>
-           </div>
+            <div className="quantity-control">
+              <img
+                className="Q-icon"
+                src={assets.removeicon}
+                alt="Remove one"
+                onClick={() =>
+                  updateQuantity(item._id, Math.max(item.quantity - 1, 1))
+                }
+              />
+              <input
+                type="text"
+                value={item.quantity}
+                readOnly
+                className="quantity"
+              />
+              <img
+                className="Q-icon"
+                src={assets.addicon}
+                alt="Add one"
+                onClick={() => updateQuantity(item._id, item.quantity + 1)}
+              />
+            </div>
 
-          <p className="proText">Total prize: </p>
+            <div className="tool-tip">
+              <img
+                className="removeCart-icon"
+                src={assets.removeCart}
+                alt="Remove cart"
+                onClick={() => removeFromCart(item._id)}
+              />
+              <span className="tool-tip-text"  onClick={() => removeFromCart(item._id)}>Remove from Cart</span>
+            </div>
+
+            <p className="proText">
+              Total Price: Rs.{item.quantity * item.prize}
+            </p>
+          </div>
         </div>
-      </div>
+      ))}
 
       <div className="pro-paid">
         <h2>To be paid</h2>
-        <p className="pro-Text">Total Item: </p>
-        <p className="pro-Text">Delivery Charge : </p>
-        <p className="pro-Text">Total Amount : Rs.</p>
-        <button className="buyBut"  onClick={() => {
-                          navigate(`/order`);
-                          scrollTo(0, 0);
-                        }}>Buy Now</button>
+        <p className="pro-Text">Total Items: {cartItems.length}</p>
+        <p className="pro-Text">Delivery Charge: Rs.100</p>
+        <p className="pro-Text">
+          Total Amount: Rs.{totalPrice + 100}
+        </p>
+        <button
+          className="buyBut"
+          onClick={() => {
+            navigate(`/order`);
+            scrollTo(0, 0);
+          }}
+        >
+          Buy Now
+        </button>
       </div>
     </div>
   );

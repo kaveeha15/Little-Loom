@@ -36,6 +36,8 @@ import cancelicon from './canselicon.png'
 import addicon from './addicon.png'
 import removeicon from './removeicon.png'
 import removeCart from './removeCart.jpeg'
+import uploadArea from './upload_area.png'
+import orderImg from './orderbox.png'
 
 
 
@@ -79,6 +81,8 @@ export const assets={
     addicon,
     removeCart,
     removeicon,
+    uploadArea,
+    orderImg,
     
 }
 

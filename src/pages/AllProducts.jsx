@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { assets, product } from "../assets/assets";
 import "../css/AllProduct.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const AllProducts = () => {
   const navigate = useNavigate();
   const { category } = useParams();
+  const { addToCart } = useContext(CartContext);
+
   const [activeCategory, setActiveCategory] = useState(category || "");
   const [filteredProducts, setFilteredProducts] = useState(product);
   const [searchQuery, setSearchQuery] = useState("");
@@ -149,12 +152,19 @@ const AllProducts = () => {
                         className="addCart-img"
                         src={assets.addCart}
                         alt="Add to Cart"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(item, 1);
+                          navigate("/cart");
+                        }}
                       />
+
                       <span
                         className="tooltip-text"
-                        onClick={() => {
-                          navigate(`/cart/${item._id}`);
-                          scrollTo(0, 0);
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(item, 1);
+                          navigate("/cart");
                         }}
                       >
                         Add to Cart

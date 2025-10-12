@@ -1,8 +1,10 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 import '../css/Header.css'
-
+import { useNavigate } from 'react-router-dom'
 const Header = () => {
+  const navigate=useNavigate()
+
   return (
     <div className='container'>
         {/*-------left side---------- */}
@@ -10,7 +12,7 @@ const Header = () => {
             <p className='section'> LITTLE LOOM </p>
             <p className='section2'>Weaving wonder  for little ones.. </p>
             <div className='element'>
-                <button className='shopnowBut'>SHOP NOW</button>
+                <button className='shopnowBut' onClick={()=>navigate("/products")}>SHOP NOW</button>
             </div>
            
 
