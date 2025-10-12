@@ -16,7 +16,15 @@ import Footer from './Components/Footer'
 
 
 function App() {
- 
+ const router=createBrowserRouter(createRoutesFromElements(
+    <Route element={<RootLayout/>}>
+       <Route index element={<AllProducts/>}/>
+        <Route path= '/totalOrders' element={<TotalOrders/>}/>
+        <Route path= '/totalUsers' element={<TotalUsers/>}/>
+         <Route path="/addproduct" element={<AddProducts/>} />
+    </Route>
+  ))
+   
   return (
    <BrowserRouter>
      <NavBar/>
@@ -25,7 +33,8 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path="/products/:category" element={<AllProduct/>} />
       <Route path='/products' element={<AllProduct/>}/>
-      <Route path='/singIn' element={<SignIn/>}/>
+      <Route path='/signin' element={<SignIn/>}/>
+      <Route path='/signup' element={<SignUp/>}/>
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/cart/:id' element={<Cart/>}/>
       <Route path='/wishlist' element={<Wishlist/>}/>
@@ -49,16 +58,4 @@ export default App
 
 
 
- /* <Router>
-        <nav>
-          <Link to='/'>All Products</Link>
-           <Link to='/totalOrders'>Total Orders</Link>
-            <Link to='/totalUsers'>Total Users</Link>
-        </nav>
-        <Routes>
-          <Route path='/'>All Products</Route>
-          <Route path='/totalOrders'>Total Orders</Route>
-          <Route path='/totalUsers'>Total Users</Route>
-        </Routes>
-      </Router>*/
-      
+ 
