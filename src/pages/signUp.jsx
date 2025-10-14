@@ -1,13 +1,13 @@
-
 import '../css/signIn.css';
 import { useNavigate } from 'react-router-dom';
-//import { auth } from '../firebase/auth'; // adjust path if needed
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../config/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -23,8 +23,20 @@ const SignUp = () => {
       return;
     }
 
-    // TODO: Firebase email/password sign-up logic here
-    navigate('/products');
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        email: user.email,
+        createdAt: new Date()
+      });
+
+      navigate('/products');
+    } catch (error) {
+      alert('Sign-Up failed: ' + error.message);
+    }
   };
 
   const handleGoogleSignUp = async () => {
@@ -32,11 +44,18 @@ const SignUp = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      console.log('Google Sign-In successful:', user);
+
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || '',
+        photoURL: user.photoURL || '',
+        createdAt: new Date()
+      });
+
       navigate('/products');
     } catch (error) {
-      console.error('Google Sign-In error:', error.message);
-      alert('Google Sign-In failed. Please try again.');
+      alert('Google Sign-Up failed: ' + error.message);
     }
   };
 
@@ -49,9 +68,9 @@ const SignUp = () => {
             <h4>Create a new account to get started</h4>
           </div>
           <div className="inputContainer">
-            <input type="text" name="email" placeholder="E-mail" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+            <input type="text" name="email" placeholder="E-mail" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
           </div>
 
           <div className="seperator">
@@ -73,7 +92,7 @@ const SignUp = () => {
 
           <h5 className="loginLink">
             You already have an account{" "}
-            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signin'); }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/signIn'); }}>
               Click here
             </a>
           </h5>

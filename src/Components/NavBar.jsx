@@ -53,7 +53,7 @@ const NavBar = () => {
       </ul>
 
       <div className="right-actions">
-        <button onClick={() => navigate("/singIn")} className="loginButton">
+        <button onClick={() => navigate("/signIn")} className="loginButton">
           SIGN IN
         </button>
 
