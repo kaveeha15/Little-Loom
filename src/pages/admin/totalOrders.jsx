@@ -40,15 +40,15 @@ const TotalOrders = () => {
                         <div>{order.Method}</div>
                         <div>{order.Date?.toDate().toLocaleString()}</div>
                       
-                        <div><select >
+                        <div>
+                        <select >
                           <option value="process">Process</option>
                           <option value="ship">Ship</option>
                           <option value="delivered">Delivered</option>
                           <option value="cancel">Cancel</option>
                           <option value="return">Return</option>
                         </select>
-                      
-                        </div>
+                      </div>
                         </div>
                 </div>
             ))
