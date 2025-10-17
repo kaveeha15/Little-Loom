@@ -96,4 +96,15 @@
 .checkout:hover{
     cursor: pointer;  
 }
+.error {
+  border: 2px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+}
 

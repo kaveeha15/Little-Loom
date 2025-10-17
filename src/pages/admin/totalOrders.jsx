@@ -4,7 +4,6 @@ import '../../css/admin/allProducts.css';
 import '../../css/admin/totalOrders.css'
 import { useEffect} from 'react';
 import useFetch from '../../hooks/useFetch';
-import { db } from "../../config/firebase";
 const TotalOrders = () => {
     const{fetchDbData,isLoading,error,data}=useFetch();
    
