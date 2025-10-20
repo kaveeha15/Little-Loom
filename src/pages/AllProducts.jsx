@@ -1,20 +1,38 @@
 import React, { useEffect, useState, useContext } from "react";
-import { assets, product } from "../assets/assets";
+import { assets} from "../assets/assets";
 import "../css/AllProduct.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../Context/CartContext";
+import {db} from '../config/firebase'
+import { collection, getDocs } from "firebase/firestore";
 
 const AllProducts = () => {
   const navigate = useNavigate();
   const { category } = useParams();
   const { addToCart } = useContext(CartContext);
 
+  const [productDetails,setProductDetails]=useState([])
+  const collRef=collection(db,"products")
+
   const [activeCategory, setActiveCategory] = useState(category || "");
-  const [filteredProducts, setFilteredProducts] = useState(product);
+  const [filteredProducts, setFilteredProducts] = useState(productDetails);
   const [searchQuery, setSearchQuery] = useState("");
 
+
+
+  useEffect(()=>{
+    getData()
+  },[])
+
+  const getData=async()=>{
+    const snap=await getDocs(collRef)
+    const dataArray=snap.docs.map((doc)=>({...doc.data(),id:doc.id}))
+    setProductDetails(dataArray)
+  }
+  console.log(productDetails)
+
   useEffect(() => {
-    let filtered = product;
+    let filtered = productDetails;
 
     if (category) {
       filtered = filtered.filter(
@@ -24,12 +42,12 @@ const AllProducts = () => {
 
     if (searchQuery) {
       filtered = filtered.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        item.Name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     setFilteredProducts(filtered);
-  }, [category, searchQuery]);
+  }, [category, searchQuery,productDetails]);
 
   const handleSpecialityClick = (category) => {
     setActiveCategory(category);
@@ -132,7 +150,7 @@ const AllProducts = () => {
                     <span
                       className="tooltip-text"
                       onClick={() => {
-                        navigate(`/wishlist/${item._id}`);
+                        navigate(`/wishlist/${item.id}`);
                         scrollTo(0, 0);
                       }}
                     >
@@ -141,8 +159,8 @@ const AllProducts = () => {
                   </div>
 
                   <div className="boxPadding">
-                    <p className="pro-name">{item.name}</p>
-                    <p className="pro-prize">Rs.{item.prize}</p>
+                    <p className="pro-name">{item.Name}</p>
+                    <p className="pro-prize">Rs.{item.Price}</p>
 
                     <div
                       className="tooltip"

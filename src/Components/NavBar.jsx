@@ -53,7 +53,7 @@ const NavBar = () => {
       </ul>
 
       <div className="right-actions">
-        <button onClick={() => navigate("/singIn")} className="loginButton">
+        <button onClick={() => navigate("/signIn")} className="loginButton">
           SIGN IN
         </button>
 
@@ -63,6 +63,9 @@ const NavBar = () => {
           alt=""
           className="wishlistlogo"
         />
+        <img src={assets.uploadArea} alt="" 
+        className="uploadProfileArea"
+        onClick={()=>navigate("/userProfile")}/>
       </div>
     </div>
   );

@@ -81,6 +81,10 @@
   width: 30px;
   cursor: pointer;
 }
+.wishlistlogo:hover {
+  transform: scale(1.1);
+ 
+}
 .navlink {
   text-decoration: none; /* removes underline */
   color: inherit; /* keeps link color */
@@ -162,4 +166,19 @@
     padding: 5px 10px;
     font-size: 11px;
   }
+}
+/* Profile upload area */
+.uploadProfileArea {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;              /* circular icon */
+  object-fit: cover;               /* maintain image proportions */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for nice feedback */
+.uploadProfileArea:hover {
+  transform: scale(1.1);
+  
 }
