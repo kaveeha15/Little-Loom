@@ -83,15 +83,15 @@ const AllProducts = () => {
     deleteDbItem('products', id);
 }
 
-   /*// Delete function
+   /*
    const handleDelete = (id) => {
       const filterArray = data.filter((product) => (product.id !== id))
       setData(filterArray)
    }*/
 
-   // Edit function
+  
    const handleEdit = (product) => {
-      navigate("/addproduct", { state: { product } });
+      navigate("/admin/addproduct", { state: { product } });
    }
 
    return (
@@ -102,7 +102,7 @@ const AllProducts = () => {
                <img src={search} alt="search" />
             </div>
             <div className="addBtn">
-               <Link to="/addproduct" className="addBtn">
+               <Link to="/admin/addproduct" className="addBtn">
                   <p>Add product</p>
                </Link>
             </div>

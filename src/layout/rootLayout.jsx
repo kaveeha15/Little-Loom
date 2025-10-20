@@ -80,19 +80,19 @@ const RootLayout = () => {
                 <hr />
                 <div className="btnSet">
                     <div className={`box ${location.pathname === '/' ? 'active' : ''}`}>
-                        <Link to='/' className='navLink'>
+                        <Link to='/admin' className='navLink'>
                             <p>All Products {productCount}</p>
                         </Link>
                         <img src={products} alt="products" />
                     </div>
                     <div className={`box ${location.pathname === '/totalOrders' ? 'active' : ''}`}>
-                        <Link to='/totalOrders' className='navLink'>
+                        <Link to='/admin/totalOrders' className='navLink'>
                             <p>Total Orders {orderCount}</p>
                         </Link>
                         <img src={order} alt="orders" />
                     </div>
                     <div className={`box ${location.pathname === '/totalUsers' ? 'active' : ''}`}>
-                        <Link to='/totalUsers' className='navLink'>
+                        <Link to='/admin/totalUsers' className='navLink'>
                             <p>Total Users {userCount}</p>
                         </Link>
                         <img src={user} alt="users" />
