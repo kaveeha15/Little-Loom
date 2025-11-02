@@ -42,6 +42,7 @@ import orderImg from './orderbox.png'
 
 
 
+
 export const assets={
     logo,
     header,
@@ -85,6 +86,7 @@ export const assets={
     removeicon,
     uploadArea,
     orderImg,
+  
     
 }
 

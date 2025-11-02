@@ -63,6 +63,9 @@ const NavBar = () => {
           alt=""
           className="wishlistlogo"
         />
+        <img src={assets.uploadArea} alt="" 
+        className="uploadProfileArea"
+        onClick={()=>navigate("/userProfile")}/>
       </div>
     </div>
   );
