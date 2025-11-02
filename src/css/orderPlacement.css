@@ -1,110 +1,149 @@
-.orderContainer{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+ .orderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #fff;
+  min-height: 100vh;
+  padding: 30px 10px;
+  box-sizing: border-box;
+}
 
-   
+.orderForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  background-color: #ffc1d1;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width:600px;
+  
 }
-.orderForm{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #FFCADD;
-    border:2px solid rgb(196, 188, 188);
-    border-radius: 10px;
-    height: 800px;
-    padding:20px;
-    margin: 10px;
-}
-.orderHeading{
-    font-size: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.orderDetails{
-    display: flex;
-    background-color: #C2185B;
-}
-.billingDetails{
-    display:flex;
-    flex-direction: column;
-    align-items:flex-start;
-    justify-content: center;
 
+.orderHeading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2b2b2b;
+  text-align: center;
+  margin-bottom: 25px;
+  width: 100%; 
 }
-.billingDetails h3{
-    font-size: 20px;
+
+.billingDetails {
+  width: 100%; 
 }
-.billingDetails input{
-    margin: 10px;
-    font-size: 12px;
-    border-radius:5px;
-    border-width: 0;
-    padding: 7px;
+
+.billingDetails h3 {
+  font-size: 17px;
+  color: #2b2b2b;
+  margin-bottom: 12px;
+  text-align: left;
 }
-.inline{
-    display: inline;
+
+.inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
 }
-.payMethod { 
- 
+
+.inline input {
+  flex: 1;
+  width: 100%;
+}
+
+.billingDetails input {
+  width: 100%; 
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.billingDetails input:focus {
+  border-color: #c2185b;
+  box-shadow: 0 0 6px rgba(194, 24, 91, 0.3);
+  outline: none;
+}
+
+
+.payMethod {
+  margin-top: 20px;
+  width: 100%; 
   border-radius: 10px;
-  width: 350px;
-  font-family: Arial, sans-serif;
+  background-color: transparent;
 }
 
 .label {
   display: flex;
   align-items: center;
-  justify-content:space-between; 
-  margin: 5px;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
+  gap: 10px;
+  margin: 6px 0;
+  padding: 5px 0;
   font-size: 15px;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
 }
 
 .label:hover {
-  background: #ffe6f0;
+  background: none;
 }
 
-.label input{
-  margin-right:20px;
-  accent-color: #ff4081; 
+.label input[type="radio"] {
+  accent-color: #c2185b;
+  transform: scale(2.3); 
   cursor: pointer;
-  transform: scale(2.0);
+}
+
+.label span {
+  color: #333;
+  font-size: 15px;
 }
 
 .label img {
   height: 28px;
 }
-.label span {
-  flex: 1; 
+
+.checkout {
+  width: 140px; 
+  margin-top: 25px;
+  align-self: center; 
+  background-color: #c2185b;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.checkout{
-    width: 200px;
-    border-radius: 10px;
-    background-color:#C2185B;
+.checkout p {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 0;
+  margin: 0;
 }
-.checkout p{
-    display: flex;
-    color: white;
-    align-items: center;
-    justify-content: center;
+
+.checkout:hover {
+  cursor: pointer;
+  background-color: #a3154f;
+  transform: scale(1.02);
 }
-.checkout:hover{
-    cursor: pointer;  
-}
+
+
 .error {
-  border: 2px solid red;
-  background-color: #ffe6e6;
+  border: 2px solid red !important;
+  background-color: #ffe6e6 !important;
 }
 
 .error-text {
   color: red;
-  font-size: 0.8rem;
-  margin-top: 4px;
+  font-size: 12px;
+  margin-left: 5px;
   display: block;
-}
-
+} 

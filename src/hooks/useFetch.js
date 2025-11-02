@@ -53,9 +53,12 @@ const useFetch = () => {
     setIsloading(true);
     try {
       const snap = await getDocs(collection(db, coll));
-      setData(snap.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      const fetchedData = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      setData(fetchedData);
+      return fetchedData; // ✅ return array to caller
     } catch (error) {
       setError(error);
+      return []; // ✅ avoid undefined
     } finally {
       setIsloading(false);
     }

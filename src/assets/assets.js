@@ -9,9 +9,10 @@ import header from './header.jpg'
 import wishlistLogo from './wishlistLogo.jpg'
 import wishlist from './wishlist.jpg'
 import addCart from './addCart.jpg'
-import whatsapp from './WhatsApp.jpg'
-import youtube from './youtube.jpg'
-import fb from './fb.jpg'
+import whatsapp from './whatsApp.svg'
+import youtube from './youtube.svg'
+import fb from './facebook.svg'
+import tiktok from './tiktok.svg'
 import email from './email.jpg'
 import phone from './phone.jpg'
 import girlCloths from './Newborn Clothes  girl 1.jpg'
@@ -32,7 +33,7 @@ import rashCream from './Rash Creams 2.jpeg'
 import babyMonitor from './Baby Monitors 1.jpeg'
 import searchIcon from './search.png'
 import backIcon from './backicon.png'
-import cancelicon from './canselicon.png'
+import cancelicon from './cancelicon.svg'
 import addicon from './addicon.png'
 import removeicon from './removeicon.png'
 import removeCart from './removeCart.jpeg'
@@ -58,6 +59,7 @@ export const assets={
     addCart,
     youtube,
     fb,
+    tiktok,
     email,
     phone,
     girlCloths,

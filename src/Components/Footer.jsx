@@ -20,34 +20,37 @@ const Footer = () => {
 
         <div className="footer-column">
           <h3>CONTACT US</h3>
-          <p>
-            <img src={assets.email} className="email-img" alt="" />{" "}
-            littleloom@gmail.com
-          </p>
+          
+          <a href="https://www.gmail.com"  target="_blank"><span><img src={assets.email} className="email-img" alt="" />{" "}
+            littleloom@gmail.com</span></a>
+          
           <p>
             <img src={assets.phone} className="phone-img" alt="" /> +94 77 842
             8666
           </p>
 
           <div className="social-icons">
-            <a href="#">
-              <img className="SMedia" src={assets.fb} alt="" />
+            <a href="https://www.facebook.com"  target="_blank">
+              <img className="SMedia" src={assets.fb} alt="fb" />
             </a>
-            <a href="#">
-              <img className="SMedia" src={assets.whatsapp} alt="" />
+            <a href="https://www.whatsapp.com"  target="_blank">
+              <img className="SMedia" src={assets.whatsapp} alt="whatsapp" />
             </a>
-            <a href="#">
-              <img className="SMedia" src={assets.youtube} alt="" />
+            <a href="https://www.youtube.com"  target="_blank">
+              <img className="SMedia" src={assets.youtube} alt="yt" />
+            </a>
+              <a href="https://www.tiktok.com"  target="_blank">
+              <img className="SMedia" src={assets.tiktok} alt="tiktok" />
             </a>
           </div>
         </div>
 
         <div className="footer-column">
           <h3>LINKS</h3>
-          <a href="">HOME</a>
-          <a href="">ALL PRODUCT</a>
-          <a href="">CART</a>
-          <a href="">SING UP</a>
+          <a href="/">HOME</a>
+          <a href="/products">ALL PRODUCT</a>
+          <a href="/cart">CART</a>
+          <a href="/signUp">SING UP</a>
         </div>
       </div>
 

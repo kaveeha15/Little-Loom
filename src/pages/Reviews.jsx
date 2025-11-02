@@ -51,10 +51,11 @@ const Reviews = () => {
         <div className="heading">
           <h2>Share Your Experience</h2>
         </div>
+      
         <div className="upload">
           <input type="file" name="upload" onChange={(e) => setFile(e.target.files[0])} />
         </div>
-        <div className="reviewsInput">
+           <div className="reviewsInput">
           <input
             type="text"
             name="name"

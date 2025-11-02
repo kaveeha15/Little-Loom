@@ -1,6 +1,5 @@
 import search from '../../assets/images/search.png'
 import orders from '../../assets/images/order.jpg'
-import '../../css/admin/allProducts.css';
 import '../../css/admin/totalOrders.css'
 import { useEffect} from 'react';
 import useFetch from '../../hooks/useFetch';
@@ -14,10 +13,6 @@ const TotalOrders = () => {
 
     return ( 
       <>
-    
-     <div className="middle">
-          <div className="searchBar"><input placeholder="Search"/><img src={search}></img></div>
-      </div>
       <div className="orderContainer">
         {
            isLoading?<h2>Loading...</h2>:data.map((order,index)=>(

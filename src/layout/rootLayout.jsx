@@ -68,14 +68,16 @@ const RootLayout = () => {
 
         fetchCounts();
     }, []);
-
+    
     return (
         <>
             <div className="navContainer">
                 <div className="top">
                     <img src={logo} alt="logo" />
                     <h1>Admin Dashboard</h1>
-                    <div className="signOutBtn"><p>Sign Out</p></div>
+                    <div className="signOutBtn">
+                     <Link to="/" className='navLink'><p>Sign Out</p></Link>   
+                    </div>
                 </div>
                 <hr />
                 <div className="btnSet">
