@@ -1,18 +1,34 @@
 import React from 'react'
-import {assets,product} from '../assets/assets'
+import {assets} from '../assets/assets'
 import { useNavigate, useParams } from 'react-router-dom'
 import '../css/ProductDetails.css'
+import { db } from "../config/firebase";
+import { collection, getDocs } from "firebase/firestore"
+import { useState,useEffect } from 'react';
 
 
 const ProductDetails = () => {
 
   const navigate=useNavigate()
 
+   const[productDetails,setProductDetails]=useState([])
+    const collRef=collection(db,"products")
+  
+    useEffect(()=>{
+      getData()
+    },[])
+  
+    const getData=async()=>{
+      const snap=await getDocs(collRef)
+      const dataArray=snap.docs.map((doc)=>({...doc.data(),id:doc.id}))
+      setProductDetails(dataArray)
+    }
+
   const {id}=useParams()
 
-  const selectProduct=product.find((item)=>item._id===id)
+  const selectProduct=productDetails.find((item)=>item.id===id)
 
-  const relatedProduct=product.filter((item)=>item.category===selectProduct.category && item._id !== id)
+  const relatedProduct=productDetails.filter((item)=>item.category===selectProduct.category && item.id !== id)
 
 
 
@@ -23,13 +39,13 @@ const ProductDetails = () => {
         <img src={selectProduct.image}alt="" />
       </div>
       <div className='proDetails'>
-        <h2 className='proText'>Name: {selectProduct.name} </h2>
-        <p className='proText'>Prize: Rs.{selectProduct.prize} </p>
-        <p className='proText'>In Stock: {selectProduct.stock} </p>
-        <p className='proText'>Description:</p><p className='des'> {selectProduct.des} </p>
+        <h2 className='proText'>Name: {selectProduct.Name} </h2>
+        <p className='proText'>Prize: Rs.{selectProduct.Price} </p>
+        <p className='proText'>In Stock: {selectProduct.Stock} </p>
+        <p className='proText'>Description:</p><p className='des'> {selectProduct.description} </p>
 
         <button className='cartBut' onClick={() => {
-                          navigate(`/cart/${selectProduct._id}`);
+                          navigate(`/cart/${selectProduct.id}`);
                           scrollTo(0, 0)
                         }} >Add to Cart</button>
       </div>
@@ -42,7 +58,7 @@ const ProductDetails = () => {
                 {relatedProduct.map((item) => (
                   <div
                     onClick={() => {
-                      navigate(`/productDetails/${item._id}`);
+                      navigate(`/productDetails/${item.id}`);
                       scrollTo(0, 0);
                     }}
                     className="pro-detailsBox"
@@ -58,7 +74,7 @@ const ProductDetails = () => {
                       <span
                         className="tooltip-text"
                         onClick={() => {
-                          navigate(`/wishlist/${item._id}`);
+                          navigate(`/wishlist/${item.id}`);
                           scrollTo(0, 0);
                         }}
                       >
@@ -67,8 +83,8 @@ const ProductDetails = () => {
                     </div>
         
                     <div className="boxPadding">
-                      <p className="pro-name">{item.name}</p>
-                      <p className="pro-prize">Rs.{item.prize}</p>
+                      <p className="pro-name">{item.Name}</p>
+                      <p className="pro-prize">Rs.{item.Price}</p>
                       <div className="tooltip" onClick={(e) => e.stopPropagation()}>
                         <img
                           className="addCart-img"
@@ -76,7 +92,7 @@ const ProductDetails = () => {
                           alt="Add to Cart"
                         />
                         <span className="tooltip-text"  onClick={() => {
-                          navigate(`/cart/${item._id}`);
+                          navigate(`/cart/${item.id}`);
                           scrollTo(0, 0);
                         }}>Add to Cart</span>
                       </div>

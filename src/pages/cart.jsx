@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from  "../Context/CartContext";
 import "../css/Cart.css";
 
 const Cart = () => {
@@ -17,69 +17,77 @@ const Cart = () => {
   }
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.prize * item.quantity,
+    (acc, item) => acc + Number(item.prize) * Number(item.quantity),
     0
   );
 
   return (
     <div>
-      {cartItems.slice().reverse().map((item) => (
-        <div className="product-Details" key={item._id}>
-          <div className="prodetails-Img">
-            <img src={item.image} alt={item.name} />
-          </div>
-          <div className="pro-Details">
-            <h2 className="pro-Text">Name: {item.name} </h2>
-            <p className="pro-Text">Price: Rs.{item.prize} </p>
-            <p className="pro-Text">In Stock: {item.stock - item.quantity} </p>
-
-            <div className="quantity-control">
-              <img
-                className="Q-icon"
-                src={assets.removeicon}
-                alt="Remove one"
-                onClick={() =>
-                  updateQuantity(item._id, Math.max(item.quantity - 1, 1))
-                }
-              />
-              <input
-                type="text"
-                value={item.quantity}
-                readOnly
-                className="quantity"
-              />
-              <img
-                className="Q-icon"
-                src={assets.addicon}
-                alt="Add one"
-                onClick={() => updateQuantity(item._id, item.quantity + 1)}
-              />
+      {cartItems
+        .slice()
+        .reverse()
+        .map((item, index) => (
+          <div className="product-Details" key={`${item._id}-${index}`}>
+            <div className="prodetails-Img">
+              <img src={item.image} alt={item.name} />
             </div>
+            <div className="pro-Details">
+              <h2 className="pro-Text">Name: {item.name}</h2>
+              <p className="pro-Text">Price: Rs.{item.prize}</p>
+              <p className="pro-Text">In Stock: {item.stock - item.quantity}</p>
 
-            <div className="tool-tip">
-              <img
-                className="removeCart-icon"
-                src={assets.removeCart}
-                alt="Remove cart"
-                onClick={() => removeFromCart(item._id)}
-              />
-              <span className="tool-tip-text"  onClick={() => removeFromCart(item._id)}>Remove from Cart</span>
+              <div className="quantity-control">
+                <img
+                  className="Q-icon"
+                  src={assets.removeicon}
+                  alt="Remove one"
+                  onClick={() =>
+                    updateQuantity(item._id, Math.max(Number(item.quantity) - 1, 1))
+                  }
+                />
+                <input
+                  type="text"
+                  value={item.quantity}
+                  readOnly
+                  className="quantity"
+                />
+                <img
+                  className="Q-icon"
+                  src={assets.addicon}
+                  alt="Add one"
+                  onClick={() =>
+                    updateQuantity(item._id, Number(item.quantity) + 1)
+                  }
+                />
+              </div>
+
+              <div className="tool-tip">
+                <img
+                  className="removeCart-icon"
+                  src={assets.removeCart}
+                  alt="Remove cart"
+                  onClick={() => removeFromCart(item._id)}
+                />
+                <span
+                  className="tool-tip-text"
+                  onClick={() => removeFromCart(item._id)}
+                >
+                  Remove from Cart
+                </span>
+              </div>
+
+              <p className="proText">
+                Total Price: Rs.{Number(item.quantity) * Number(item.prize)}
+              </p>
             </div>
-
-            <p className="proText">
-              Total Price: Rs.{item.quantity * item.prize}
-            </p>
           </div>
-        </div>
-      ))}
+        ))}
 
       <div className="pro-paid">
         <h2>To be paid</h2>
         <p className="pro-Text">Total Items: {cartItems.length}</p>
         <p className="pro-Text">Delivery Charge: Rs.100</p>
-        <p className="pro-Text">
-          Total Amount: Rs.{totalPrice + 100}
-        </p>
+        <p className="pro-Text">Total Amount: Rs.{totalPrice + 100}</p>
         <button
           className="buyBut"
           onClick={() => {

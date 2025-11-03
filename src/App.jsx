@@ -87,12 +87,17 @@ import AllProductsAdmin from './pages/admin/allProducts';
 import NavBar from './Components/NavBar';
 import Footer from './Components/Footer';
 
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const { user, role, loading } = useAuth();
 
   if (loading) return <div>Loading...</div>;
 
   return (
+
     <BrowserRouter>
       <Routes>
         {user && role === 'admin' && (
@@ -122,7 +127,7 @@ function App() {
                 <Route path="/review" element={<Reviews />} />
                 <Route path="/productDetails/:id" element={<ProductDetails />} />
                 <Route path="/order" element={<OrderPlacement />} />
-                <Route path="/user" element={<UserProfile />} />
+                <Route path='/userProfile' element={<UserProfile/>}/>
                 <Route path="/admin/*" element={<Navigate to="/" />} />
               </Routes>
               <Footer />
@@ -130,7 +135,10 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer position="top-center" autoClose={2000} />
     </BrowserRouter>
+
+    
   );
 }
 
