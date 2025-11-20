@@ -125,7 +125,7 @@ function App() {
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/wishlist/:id" element={<Wishlist />} />
                 <Route path="/review" element={<Reviews />} />
-                <Route path="/productDetails/:id" element={<ProductDetails />} />
+                <Route path='/productDetails/:id' element={<ProductDetails/>}/>
                 <Route path="/order" element={<OrderPlacement />} />
                 <Route path='/userProfile' element={<UserProfile/>}/>
                 <Route path="/admin/*" element={<Navigate to="/" />} />

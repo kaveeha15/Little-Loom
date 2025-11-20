@@ -26,6 +26,7 @@ const CategoryFilter = () => {
     <div className='container1' id='category'>
         <div className='item'>
             {categoryData.map((item,index)=>(
+              
                 <Link onClick={()=>scrollTo(0,0)} className='link' key={item.id} to={`/products/${item.category}`}>
                     <img className='images' src={item.image} alt="" />
                     <p>{item.category}</p>

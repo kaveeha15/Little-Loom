@@ -39,6 +39,7 @@ import removeicon from './removeicon.png'
 import removeCart from './removeCart.jpeg'
 import uploadArea from './upload_area.png'
 import orderImg from './orderbox.png'
+import defaultImage from './defaultImg.png'
 
 
 
@@ -86,6 +87,7 @@ export const assets={
     removeicon,
     uploadArea,
     orderImg,
+    defaultImage,
   
     
 }

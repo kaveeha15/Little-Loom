@@ -5,18 +5,16 @@ import "../css/NavBar.css";
 import { useEffect } from "react";
 import { auth, db } from "../config/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth"; 
-
+import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 
 const NavBar = () => {
-
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [profileImage, setProfileImage] = useState(assets.uploadArea);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         setIsLoggedIn(true);
@@ -37,18 +35,20 @@ const NavBar = () => {
   }, []);
 
   const handleSignIn = () => {
-    setIsLoggedIn(true);
     navigate("/signIn");
   };
 
-  const handleSignOut = () => {
-    setIsLoggedIn(false);
-    navigate("/");
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
-
-  const handleProfileImage=()=>{
-    navigate("/userProfile")
-  }
+  const handleProfileImage = () => {
+    navigate("/userProfile");
+  };
 
   return (
     <div className="navbar">
@@ -116,15 +116,13 @@ const NavBar = () => {
         />
 
         {isLoggedIn && (
-       <img
-    src={profileImage}
-    alt="profile"
-    className="uploadProfileArea"
-    onClick={handleProfileImage}
-  />
-          )}
-
-        
+          <img
+            src={profileImage}
+            alt="profile"
+            className="uploadProfileArea"
+            onClick={handleProfileImage}
+          />
+        )}
       </div>
     </div>
   );

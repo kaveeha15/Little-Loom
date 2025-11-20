@@ -111,6 +111,7 @@
 .tool-tip {
   position: relative;      /* keeps tooltip text relative to the icon */
   display: inline-block;   /* wrap tightly around the image */
+  cursor: pointer;
 }
 
 .removeCart-icon {

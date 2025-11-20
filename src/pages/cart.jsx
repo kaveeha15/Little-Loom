@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { CartContext } from  "../Context/CartContext";
+import { CartContext } from "../Context/CartContext";
 import "../css/Cart.css";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cartItems, updateQuantity, removeFromCart } = useContext(CartContext);
+  const { cartItems, updateQuantity, removeFromCart, placeOrder, clearCart } =
+    useContext(CartContext);
 
-  if (cartItems.length === 0) {
+  if (!cartItems || cartItems.length === 0) {
     return (
       <div className="cart-empty">
         <h2>No products in cart.</h2>
@@ -17,7 +19,7 @@ const Cart = () => {
   }
 
   const totalPrice = cartItems.reduce(
-    (acc, item) => acc + Number(item.prize) * Number(item.quantity),
+    (acc, item) => acc + Number(item.price) * Number(item.quantity),
     0
   );
 
@@ -33,7 +35,7 @@ const Cart = () => {
             </div>
             <div className="pro-Details">
               <h2 className="pro-Text">Name: {item.name}</h2>
-              <p className="pro-Text">Price: Rs.{item.prize}</p>
+              <p className="pro-Text">Price: Rs.{item.price}</p>
               <p className="pro-Text">In Stock: {item.stock - item.quantity}</p>
 
               <div className="quantity-control">
@@ -42,7 +44,10 @@ const Cart = () => {
                   src={assets.removeicon}
                   alt="Remove one"
                   onClick={() =>
-                    updateQuantity(item._id, Math.max(Number(item.quantity) - 1, 1))
+                    updateQuantity(
+                      item._id,
+                      Math.max(Number(item.quantity) - 1, 1)
+                    )
                   }
                 />
                 <input
@@ -77,7 +82,7 @@ const Cart = () => {
               </div>
 
               <p className="proText">
-                Total Price: Rs.{Number(item.quantity) * Number(item.prize)}
+                Total Price: Rs.{Number(item.quantity) * Number(item.price)}
               </p>
             </div>
           </div>
@@ -91,7 +96,7 @@ const Cart = () => {
         <button
           className="buyBut"
           onClick={() => {
-            navigate(`/order`);
+            navigate("/order"); 
             scrollTo(0, 0);
           }}
         >

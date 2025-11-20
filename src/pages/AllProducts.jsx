@@ -1,115 +1,91 @@
 import React, { useEffect, useState, useContext } from "react";
-import { assets} from "../assets/assets";
+import { assets } from "../assets/assets";
 import "../css/AllProduct.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { CartContext } from "../Context/CartContext";
-import {db} from '../config/firebase'
-import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { WishlistContext } from "../Context/WishlistContext";
 
 const AllProducts = () => {
   const navigate = useNavigate();
   const { category } = useParams();
   const { addToCart } = useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext);
 
-  const [productDetails,setProductDetails]=useState([])
-  const collRef=collection(db,"products")
-
-  const [activeCategory, setActiveCategory] = useState(category || "");
-  const [filteredProducts, setFilteredProducts] = useState(productDetails);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState(category || "");
+  const [loading, setLoading] = useState(true);
 
-
-
-  useEffect(()=>{
-    getData()
-  },[])
-
-  const getData=async()=>{
-    const snap=await getDocs(collRef)
-    const dataArray=snap.docs.map((doc)=>({...doc.data(),id:doc.id}))
-    setProductDetails(dataArray)
-  }
-  console.log(productDetails)
-
+  // Fetch products from Firestore based on category
   useEffect(() => {
-    let filtered = productDetails;
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const collRef = collection(db, "products");
+        let q = collRef;
 
-    if (category) {
-      filtered = filtered.filter(
-        (item) => item.category.toLowerCase() === category.toLowerCase()
-      );
-    }
+        // Add category filter if present
+        if (category) {
+          q = query(collRef, where("category", "==", category));
+        }
 
-    if (searchQuery) {
-      filtered = filtered.filter((item) =>
-        item.Name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
+        const snap = await getDocs(q);
+        let products = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-    setFilteredProducts(filtered);
-  }, [category, searchQuery,productDetails]);
+        // Apply search filter locally
+        if (searchQuery) {
+          products = products.filter((item) =>
+            item.Name.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        }
 
-  const handleSpecialityClick = (category) => {
-    setActiveCategory(category);
-    navigate(`/products/${category}`);
+        setFilteredProducts(products);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        toast.error("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [category, searchQuery]);
+
+  const handleSpecialityClick = (cat) => {
+    setActiveCategory(cat);
+    navigate(`/products/${cat}`);
   };
+
+  if (loading) return <div>Loading products...</div>;
 
   return (
     <div>
       <p className="filter-topic">
         Browse safe & trusted kids products with ease.
       </p>
+
       <div className="main-content-container">
         <div className="filter-box">
           <div className="filter-box2">
-            <p
-              className={`pro-type ${
-                activeCategory === "Clothing & Accessories" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Clothing & Accessories")}
-            >
-              Clothing & Accessories
-            </p>
-            <p
-              className={`pro-type ${
-                activeCategory === "Diapers & Hygiene" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Diapers & Hygiene")}
-            >
-              Diapers & Hygiene
-            </p>
-            <p
-              className={`pro-type ${
-                activeCategory === "Feeding Essentials" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Feeding Essentials")}
-            >
-              Feeding Essentials
-            </p>
-            <p
-              className={`pro-type ${
-                activeCategory === "Nursery & Furniture" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Nursery & Furniture")}
-            >
-              Nursery & Furniture
-            </p>
-            <p
-              className={`pro-type ${
-                activeCategory === "Health & Safety" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Health & Safety")}
-            >
-              Health & Safety
-            </p>
-            <p
-              className={`pro-type ${
-                activeCategory === "Toys & Learning" ? "active" : ""
-              }`}
-              onClick={() => handleSpecialityClick("Toys & Learning")}
-            >
-              Toys & Learning
-            </p>
+            {[
+              "Clothing & Accessories",
+              "Diapers & Hygiene",
+              "Feeding Essentials",
+              "Nursery & Furniture",
+              "Health & Safety",
+              "Toys & Learning",
+            ].map((cat) => (
+              <p
+                key={cat}
+                className={`pro-type ${activeCategory === cat ? "active" : ""}`}
+                onClick={() => handleSpecialityClick(cat)}
+              >
+                {cat}
+              </p>
+            ))}
           </div>
         </div>
 
@@ -127,16 +103,20 @@ const AllProducts = () => {
 
           <div className="pro-details">
             {filteredProducts.length > 0 ? (
-              filteredProducts.map((item, index) => (
+              filteredProducts.map((item) => (
                 <div
+                  key={item.id}
+                  className="pro-detailsBox"
                   onClick={() => {
-                    navigate(`/productDetails/${item._id}`);
+                    navigate(`/productDetails/${item.id}`);
                     scrollTo(0, 0);
                   }}
-                  className="pro-detailsBox"
-                  key={index}
                 >
-                  <img className="boxClor" src={item.image} alt="" />
+                  <img
+                    className="boxClor"
+                    src={item.image || assets.defaultImage}
+                    alt={item.Name}
+                  />
 
                   <div
                     className="tooltip wishlist-tooltip"
@@ -146,12 +126,26 @@ const AllProducts = () => {
                       className="wishlist-img"
                       src={assets.wishlist}
                       alt="Add to Wishlist"
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        const success = await addToWishlist(item);
+                        if (!success) {
+                          navigate("/signIn");
+                        } else {
+                          navigate("/wishlist");
+                        }
+                      }}
                     />
                     <span
                       className="tooltip-text"
-                      onClick={() => {
-                        navigate(`/wishlist/${item.id}`);
-                        scrollTo(0, 0);
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        const success = await addToWishlist(item);
+                        if (!success) {
+                          navigate("/signIn");
+                        } else {
+                          navigate("/wishlist");
+                        }
                       }}
                     >
                       Add to Wishlist
@@ -170,19 +164,26 @@ const AllProducts = () => {
                         className="addCart-img"
                         src={assets.addCart}
                         alt="Add to Cart"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation();
-                          addToCart(item, 1);
-                          navigate("/cart");
+                          const success = await addToCart(item, 1);
+                          if (!success) {
+                            navigate("/signIn"); // redirect to login if not logged in
+                          } else {
+                            navigate("/cart"); // redirect to cart if added successfully
+                          }
                         }}
                       />
-
                       <span
                         className="tooltip-text"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation();
-                          addToCart(item, 1);
-                          navigate("/cart");
+                          const success = await addToCart(item, 1);
+                          if (!success) {
+                            navigate("/signIn");
+                          } else {
+                            navigate("/cart");
+                          }
                         }}
                       >
                         Add to Cart
@@ -192,7 +193,7 @@ const AllProducts = () => {
                 </div>
               ))
             ) : (
-              <p>No products found in this category.</p>
+              <p>No products found.</p>
             )}
           </div>
         </div>
@@ -202,6 +203,3 @@ const AllProducts = () => {
 };
 
 export default AllProducts;
-
-
-

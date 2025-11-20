@@ -2,16 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import "../css/Highlight.css";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
+import { CartContext } from "../Context/CartContext";
 import { db } from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
-
+import { WishlistContext } from "../Context/WishlistContext";
+import { auth } from "../config/firebase";
 
 const Highlight = () => {
   const navigate = useNavigate();
-
-  const [isLogIn, setIsLogIn] = useState(false);
 
   const [productDetails, setProductDetails] = useState([]);
   const collRef = collection(db, "products");
@@ -26,15 +25,26 @@ const Highlight = () => {
     setProductDetails(dataArray);
   };
   const { addToCart } = useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext);
+
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setIsLogIn(true);
-    } else {
-      setIsLogIn(false);
-    }
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
   }, []);
+
+  const requireLogin = () => {
+    if (!user) {
+      toast.error("Please log in first!");
+      navigate("/signIn");
+      return false;
+    }
+    return true;
+  };
 
   return (
     <div className="proMenu">
@@ -50,7 +60,10 @@ const Highlight = () => {
             className="pro-detailsBox"
             key={item.id}
           >
-            <img className="boxClor" src={item.image} alt="" />
+            <img
+              className="boxClor"
+              src={item.image ? item.image : assets.defaultImage}
+            />
             <div
               className="tooltip wishlist-tooltip"
               onClick={(e) => e.stopPropagation()}
@@ -59,18 +72,20 @@ const Highlight = () => {
                 className="wishlist-img"
                 src={assets.wishlist}
                 alt="Add to Wishlist"
+                onClick={async (e) => {
+                  e.stopPropagation();
+                  if (!requireLogin()) return;
+                  await addToWishlist(item);
+                  navigate("/wishlist");
+                }}
               />
               <span
                 className="tooltip-text"
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.stopPropagation();
-                  if (isLogIn) {
-                    navigate(`/wishlist/${item.id}`);
-                  } else {
-                    toast.error("Please SignIn First!!")
-                    navigate("/signIn");
-                  }
-                  scrollTo(0, 0);
+                  if (!requireLogin()) return;
+                  await addToWishlist(item);
+                  navigate("/wishlist");
                 }}
               >
                 Add to Wishlist
@@ -87,6 +102,7 @@ const Highlight = () => {
                   alt="Add to Cart"
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (!requireLogin()) return;
                     addToCart(item, 1);
                     navigate("/cart");
                   }}
@@ -96,6 +112,7 @@ const Highlight = () => {
                   className="tooltip-text"
                   onClick={(e) => {
                     e.stopPropagation();
+                     if (!requireLogin()) return;
                     addToCart(item, 1);
                     navigate("/cart");
                   }}
