@@ -7,7 +7,6 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const UserProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -23,9 +22,9 @@ const UserProfile = () => {
     const fetchUserData = async () => {
       const user = auth.currentUser;
       if (user) {
-        setEmail(user.email); // email from Firebase Auth
+        setEmail(user.email);
 
-        const userRef = doc(db, "users", user.uid);
+        const userRef = doc(db, "totalUsers", user.uid); // 🔥 updated
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
@@ -57,36 +56,41 @@ const UserProfile = () => {
   // ✅ Save updated details to Firestore
   const handleSave = async () => {
     const user = auth.currentUser;
-    if (!user) return;
+    if (!user) {
+      toast.error("User not logged in!");
+      return;
+    }
 
     try {
-       await setDoc(
-      doc(db, "users", user.uid),
-      {
-        name,
-        phone,
-        address1,
-        address2,
-        profileImage: userImage,
-      },
-      { merge: true }
-    );
+      const userRef = doc(db, "totalUsers", user.uid); // 🔥 updated
 
-    toast.success("Profile Updated Successfully!!")
-    setIsEdit(false);
-  
-      
+      await setDoc(
+        userRef,
+        {
+          name,
+          phone,
+          address1,
+          address2,
+          profileImage: userImage,
+          email: user.email,
+          uid: user.uid,
+        },
+        { merge: true }
+      );
+
+      toast.success("Profile Updated Successfully!");
+      setIsEdit(false);
+
     } catch (error) {
-      toast.error("Failed to save changes",error)
-      
+      console.error(error);
+      toast.error("Failed to save changes");
     }
-  }
-
-   
+  };
 
   return (
     <div>
       <div className="profile-container">
+
         <div className="image-wrapper">
           {isEdit ? (
             <label className="image-upload-label">
@@ -97,9 +101,7 @@ const UserProfile = () => {
                 style={{ display: "none" }}
               />
               <img src={userImage} alt="User" className="userImage" />
-              <div className="overlay-text">
-                Click Here to Change Profile Photo
-              </div>
+              <div className="overlay-text">Click Here to Change Profile Photo</div>
             </label>
           ) : (
             <img src={userImage} alt="User" className="userImage" />
@@ -118,7 +120,7 @@ const UserProfile = () => {
 
           <div className="detail-row">
             <span className="label-text">Email:</span>
-            <span className="value-text">{email}</span> {/*  Always Read Only */}
+            <span className="value-text">{email}</span>
           </div>
 
           <div className="detail-row">
@@ -138,9 +140,7 @@ const UserProfile = () => {
                 <input value={address2} onChange={(e) => setAddress2(e.target.value)} />
               </div>
             ) : (
-              <span className="value-text">
-                {address1}, {address2}
-              </span>
+              <span className="value-text">{address1}, {address2}</span>
             )}
           </div>
         </div>

@@ -15,13 +15,14 @@ const TotalUsers = () => {
     {
         isLoading?<h2>Loading...</h2>:data.map((user,index)=>(
         <div className="user" key={index}>
-            <div className="uImg">{user.image}</div>
+            <div className="uImg">{user.Image}</div>
             <div className="userData">
-                <div>{user.Name}</div>
+                <div>{user.name}</div>
                 <div>{user.email}</div>
-                <div>{user.Address}</div>
-                <div>{user.phoneNumber}</div>
-                <div>{user.noOfitems}</div>
+                <div>{user.address1}</div>
+                 <div>{user.address2}</div>
+                <div>{user.phone}</div>
+               
             </div>  
         </div>
 
