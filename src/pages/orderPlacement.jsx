@@ -95,7 +95,7 @@ const OrderPlacement = () => {
 
 
   return (
-    <div className="orderContainer">
+    <div className="orderCon">
       <div className="orderForm">
         <div className="orderHeading">
           <h2>Order Details</h2>

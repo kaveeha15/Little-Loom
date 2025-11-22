@@ -1,149 +1,111 @@
- .orderContainer {
+
+.orderCon {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #fff;
+  justify-content: center;     
+  align-items: center;         
+  padding: 20px 10px;
+  background-color: #f9f9f9;
   min-height: 100vh;
-  padding: 30px 10px;
-  box-sizing: border-box;
+           
 }
 
 .orderForm {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  background-color: #ffc1d1;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  width:600px;
-  
+ 
+  background-color: #FFCADD;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.orderHeading {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2b2b2b;
+.orderHeading h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
   text-align: center;
-  margin-bottom: 25px;
-  width: 100%; 
-}
-
-.billingDetails {
-  width: 100%; 
 }
 
 .billingDetails h3 {
-  font-size: 17px;
-  color: #2b2b2b;
-  margin-bottom: 12px;
-  text-align: left;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .inline {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
-  width: 100%;
+  flex-wrap: nowrap;        
 }
 
-.inline input {
-  flex: 1;
-  width: 100%;
-}
-
+.inputContainer input,
 .billingDetails input {
-  width: 100%; 
-  margin-bottom: 12px;
-  padding: 10px 12px;
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  text-align: left;
+  box-sizing: border-box;
 }
 
-.billingDetails input:focus {
-  border-color: #c2185b;
-  box-shadow: 0 0 6px rgba(194, 24, 91, 0.3);
-  outline: none;
-}
-
-
-.payMethod {
-  margin-top: 20px;
-  width: 100%; 
-  border-radius: 10px;
-  background-color: transparent;
-}
-
-.label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 6px 0;
-  padding: 5px 0;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  background: none;
-  border: none;
-}
-
-.label:hover {
-  background: none;
-}
-
-.label input[type="radio"] {
-  accent-color: #c2185b;
-  transform: scale(2.3); 
-  cursor: pointer;
-}
-
-.label span {
-  color: #333;
-  font-size: 15px;
-}
-
-.label img {
-  height: 28px;
-}
-
-.checkout {
-  width: 140px; 
-  margin-top: 25px;
-  align-self: center; 
-  background-color: #c2185b;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.checkout p {
-  text-align: center;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 8px 0;
-  margin: 0;
-}
-
-.checkout:hover {
-  cursor: pointer;
-  background-color: #a3154f;
-  transform: scale(1.02);
-}
-
-
-.error {
-  border: 2px solid red !important;
-  background-color: #ffe6e6 !important;
+input.error {
+  border-color: #a31a2c;
 }
 
 .error-text {
-  color: red;
-  font-size: 12px;
-  margin-left: 5px;
+  color: #a31a2c;
+  font-size: 10px;
+  margin-top: -4px;
   display: block;
-} 
+}
+
+.payMethod {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payMethod .label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.payMethod .label img {
+  width: 25px;
+  height: auto;
+}
+
+.checkout {
+  margin-top: 20px;
+  background-color: #C2185B;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.checkout:hover {
+  background-color: #C2185B;
+}
+
+
+.inline > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.inline > div input {
+  width: 100%;   
+}
+
+@media (max-width: 400px) {
+  .inline {
+    flex-direction: column;
+  }
+}

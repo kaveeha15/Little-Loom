@@ -23,7 +23,6 @@ const TotalOrders = () => {
                 <img src={orders} alt="Order" />
               </div>
 
-              {/* Order ID and Billing Info */}
               <div className="oItem">
                 <div>Order ID: {index + 1}</div>
                 <div>{order.billingDetails?.fName}</div>
@@ -33,7 +32,6 @@ const TotalOrders = () => {
              
               </div>
 
-              {/* Items Ordered */}
               <div className="oItem">
                 {order.items?.map((item, i) => (
                   <div key={i} className="itemDetails">
@@ -52,7 +50,7 @@ const TotalOrders = () => {
                 ))}
               </div>
 
-              {/* Payment and Status */}
+  
               <div className="oItem">
                 <div>Payment: {order.billingDetails?.paymentMethod}</div>
                 <div>
