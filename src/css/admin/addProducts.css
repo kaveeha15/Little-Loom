@@ -24,12 +24,16 @@
   flex-direction: column;
   justify-content: center;
   align-items:center;
-  padding:40px;
+  padding: 10px;
+max-height: 100px;
   background-color:white;
   border: 2px dashed #ccc;
   border-radius: 10px;
-  width: 50%;
+ 
   transition: border-color 0.3s ease;
+}
+.addImg img{
+    max-height: 100px;
 }
 .addImg:hover{
     border-color: #999;

@@ -15,7 +15,7 @@ const TotalUsers = () => {
     {
         isLoading?<h2>Loading...</h2>:data.map((user,index)=>(
         <div className="user" key={index}>
-            <div className="uImg">{user.Image}</div>
+            <div className="uImg"><img src={user.profileImage} alt="user" /></div>
             <div className="userData">
                 <div>{user.name}</div>
                 <div>{user.email}</div>
