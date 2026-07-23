@@ -79,9 +79,9 @@ const SignUp = () => {
           </div>
 
           <div className="seperator">
-            <div className="hr"><hr /></div>
+            <div className="hr"></div>
             <div className="seperatorText"><h4>OR CONTINUE WITH</h4></div>
-            <div className="hr"><hr /></div>
+            <div className="hr"></div>
           </div>
 
           <div className="btnContainer">

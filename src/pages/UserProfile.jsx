@@ -11,8 +11,10 @@ const UserProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [userImage, setUserImage] = useState(assets.uploadArea);
+  const [imageFile, setImageFile] = useState(null); // ✅ NEW: file store
+  const [uploading, setUploading] = useState(false); // ✅ NEW: loading
   const [name, setName] = useState("");
-  const [email, setEmail] = useState(""); 
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -24,7 +26,7 @@ const UserProfile = () => {
       if (user) {
         setEmail(user.email);
 
-        const userRef = doc(db, "totalUsers", user.uid); // 🔥 updated
+        const userRef = doc(db, "totalUsers", user.uid);
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
@@ -41,15 +43,36 @@ const UserProfile = () => {
     fetchUserData();
   }, []);
 
-  // ✅ Upload profile image
+  // ✅ Cloudinary Upload Function
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "little_loom_products"); // ⚠️ ඔබේ preset
+    data.append("cloud_name", "qtj1ejpm"); // ⚠️ ඔබේ cloud name
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/qtj1ejpm/image/upload`,
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const result = await res.json();
+    console.log("☁️ Cloudinary result:", result);
+    return result.secure_url;
+  };
+
+  // ✅ Handle image selection (preview only, no upload yet)
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setUserImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please upload a valid image!");
+        return;
+      }
+      setImageFile(file); // ⚡ Store file for later upload
+      setUserImage(URL.createObjectURL(file)); // ⚡ Temporary preview
     }
   };
 
@@ -62,7 +85,17 @@ const UserProfile = () => {
     }
 
     try {
-      const userRef = doc(db, "totalUsers", user.uid); // 🔥 updated
+      setUploading(true);
+      let profileImageUrl = userImage;
+
+      // ✅ Upload new image to Cloudinary if selected
+      if (imageFile) {
+        console.log("📤 Uploading profile image to Cloudinary...");
+        profileImageUrl = await uploadToCloudinary(imageFile);
+        console.log("✅ Uploaded URL:", profileImageUrl);
+      }
+
+      const userRef = doc(db, "totalUsers", user.uid);
 
       await setDoc(
         userRef,
@@ -71,26 +104,28 @@ const UserProfile = () => {
           phone,
           address1,
           address2,
-          profileImage: userImage,
+          profileImage: profileImageUrl, // ✅ Cloudinary URL (small string)
           email: user.email,
           uid: user.uid,
         },
         { merge: true }
       );
 
+      setUserImage(profileImageUrl);
+      setImageFile(null);
       toast.success("Profile Updated Successfully!");
       setIsEdit(false);
-
     } catch (error) {
-      console.error(error);
+      console.error("🔥 Error:", error);
       toast.error("Failed to save changes");
+    } finally {
+      setUploading(false);
     }
   };
 
   return (
     <div>
       <div className="profile-container">
-
         <div className="image-wrapper">
           {isEdit ? (
             <label className="image-upload-label">
@@ -101,7 +136,9 @@ const UserProfile = () => {
                 style={{ display: "none" }}
               />
               <img src={userImage} alt="User" className="userImage" />
-              <div className="overlay-text">Click Here to Change Profile Photo</div>
+              <div className="overlay-text">
+                Click Here to Change Profile Photo
+              </div>
             </label>
           ) : (
             <img src={userImage} alt="User" className="userImage" />
@@ -136,18 +173,28 @@ const UserProfile = () => {
             <span className="label-text">Address:</span>
             {isEdit ? (
               <div className="address-inputs">
-                <input value={address1} onChange={(e) => setAddress1(e.target.value)} />
-                <input value={address2} onChange={(e) => setAddress2(e.target.value)} />
+                <input
+                  value={address1}
+                  onChange={(e) => setAddress1(e.target.value)}
+                />
+                <input
+                  value={address2}
+                  onChange={(e) => setAddress2(e.target.value)}
+                />
               </div>
             ) : (
-              <span className="value-text">{address1}, {address2}</span>
+              <span className="value-text">
+                {address1}, {address2}
+              </span>
             )}
           </div>
         </div>
 
         <div>
           {isEdit ? (
-            <button onClick={handleSave}>Save</button>
+            <button onClick={handleSave} disabled={uploading}>
+              {uploading ? "Saving..." : "Save"}
+            </button>
           ) : (
             <button onClick={() => setIsEdit(true)}>Edit</button>
           )}

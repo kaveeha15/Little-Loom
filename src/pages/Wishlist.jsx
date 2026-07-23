@@ -56,7 +56,7 @@ const Wishlist = () => {
                           id: item.productId,
                           Name: item.name,
                           Price: item.price,
-                          image: item.image,
+                          image: item.Image,
                           stock: item.stock,
                         },
                         1

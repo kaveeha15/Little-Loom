@@ -1,7 +1,7 @@
 .signInContainer{
    display: flex; 
    flex-direction:column;
-   color: black;
+   color: rgb(11, 11, 11);
    align-items: center;
    padding: 50px;
    margin: 30px;
@@ -14,10 +14,15 @@
     background-color:#FFCADD;
    border-radius: 10px;
    padding: 20px;
-   max-width: 500px;
+   width: 360px;
+   max-height:500px ;
+}
+.signInHeading h2{
+   color: #C2185B;
 }
 .signInHeading h4{
-    color: rgba(78, 70, 70, 0.56);
+    color: rgba(78, 70, 70, 0.645);
+    font-weight: bold;
 }
  .inputContainer{
     display:flex;
@@ -26,8 +31,9 @@
 
  } 
  .inputContainer input{
-max-width: 400px;
-margin:20px;
+max-width: 330px;
+margin-left:18px;
+margin-top: 15px;
 background-color: white;
 border-width: 0px;
 border-radius: 10px;
@@ -40,6 +46,8 @@ padding: 10px;
  }
  .hr{
     flex: 1;
+    height: 2px;
+    background-color:rgba(78, 70, 70, 0.645);
    
  }
  .seperatorText{
@@ -59,8 +67,8 @@ padding: 10px;
  .gmailBtn{
     display: flex;
     gap:10px;
-   max-height: 40px;
-   width: 400px;
+   max-height: 30px;
+   width:350px;
    align-items: center;
    justify-content:center;
     background-color: white;

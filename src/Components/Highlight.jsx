@@ -62,7 +62,7 @@ const Highlight = () => {
           >
             <img
               className="boxClor"
-              src={item.image ? item.image : assets.defaultImage}
+              src={item.Image ? item.Image : assets.defaultImage}
             />
             <div
               className="tooltip wishlist-tooltip"

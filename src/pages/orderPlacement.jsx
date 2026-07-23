@@ -41,11 +41,23 @@ const OrderPlacement = () => {
     }
   };
 
-  const totalAmount =
-    cartItems.reduce(
-      (acc, item) => acc + Number(item.price) * Number(item.quantity),
-      0
-    ) + 100;
+  // ✅ Total quantity of all items
+  const totalItems = cartItems.reduce(
+    (acc, item) => acc + Number(item.quantity),
+    0
+  );
+
+  // ✅ Subtotal (price × quantity)
+  const subtotal = cartItems.reduce(
+    (acc, item) => acc + Number(item.price) * Number(item.quantity),
+    0
+  );
+
+  // ✅ Delivery Charge
+  const deliveryCharge = 500;
+
+  // ✅ Total Amount
+  const totalAmount = subtotal + deliveryCharge;
 
   const handleSubmit = async () => {
     const requiredFields = [
@@ -91,14 +103,18 @@ const OrderPlacement = () => {
     }
   };
 
-
-
-
   return (
     <div className="orderCon">
       <div className="orderForm">
         <div className="orderHeading">
           <h2>Order Details</h2>
+        </div>
+
+        {/* ✅ NEW: Order Summary Section (Total Items, Delivery, Total) */}
+        <div className="orderSummary">
+          <p className="summary-line">Total Items: {totalItems}</p>
+          <p className="summary-line">Delivery Charge: Rs.{deliveryCharge}</p>
+          <p className="summary-line">Total Amount: Rs.{totalAmount}</p>
         </div>
 
         <div className="billingDetails">

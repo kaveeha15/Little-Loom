@@ -1,9 +1,8 @@
-import '../../css/admin/addProducts.css';
+ import '../../css/admin/addProducts.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { db, storage } from '../../config/firebase';
+import { db } from '../../config/firebase';
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddProducts = () => {
   const location = useLocation();
@@ -19,14 +18,13 @@ const AddProducts = () => {
     addImg: product?.Image || "",
   });
 
-  const [file, setFile] = useState(null); // track selected file
+  const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(product?.Image || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    // IMAGE SELECT
     if (files && files.length > 0) {
       const selectedFile = files[0];
 
@@ -36,25 +34,50 @@ const AddProducts = () => {
       }
 
       setFile(selectedFile);
-      setPreview(URL.createObjectURL(selectedFile)); // temporary preview
+      setPreview(URL.createObjectURL(selectedFile));
       return;
     }
 
-    // NORMAL INPUT
     setFormData({ ...formData, [name]: value });
+  };
+
+  // ✅ Cloudinary Upload Function
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "little_loom_products"); // ⚠️ ඔබේ preset name
+    data.append("cloud_name", "qtj1ejpm"); // ⚠️ ඔබේ cloud name
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/qtj1ejpm/image/upload`, // ⚠️ ඔබේ cloud name
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const result = await res.json();
+    console.log("☁️ Cloudinary result:", result);
+    return result.secure_url;
   };
 
   const handleSubmit = async () => {
     try {
       setIsSubmitting(true);
 
-      let imageUrl = formData.addImg; // default to existing image
+      let imageUrl = formData.addImg;
 
-      // UPLOAD NEW IMAGE IF SELECTED
+      // Upload to Cloudinary if new file selected
       if (file) {
-        const storageRef = ref(storage, `products/${Date.now()}_${file.name}`);
-        await uploadBytes(storageRef, file);
-        imageUrl = await getDownloadURL(storageRef);
+        console.log("📤 Uploading to Cloudinary...");
+        imageUrl = await uploadToCloudinary(file);
+        console.log("✅ Uploaded URL:", imageUrl);
+      }
+
+      if (!imageUrl) {
+        alert("⚠️ Please select an image!");
+        setIsSubmitting(false);
+        return;
       }
 
       const productData = {
@@ -63,25 +86,22 @@ const AddProducts = () => {
         Stock: Number(formData.noItem) || 0,
         description: formData.des.trim(),
         Category: formData.category,
-        Image: imageUrl, // Save Storage URL
+        Image: imageUrl,
       };
 
-      // UPDATE EXISTING PRODUCT
       if (product && product.id) {
         const updateRef = doc(db, "products", product.id);
         await updateDoc(updateRef, productData);
         alert("✅ Product Updated Successfully!");
-      }
-      // ADD NEW PRODUCT
-      else {
+      } else {
         await addDoc(collection(db, "products"), productData);
         alert("✅ Product Added Successfully!");
       }
 
-      setFile(null); // reset selected file
-      navigate("/admin/products"); // adjust route as needed
+      setFile(null);
+      navigate("/admin/products");
     } catch (err) {
-      console.error("🔥 FIREBASE ERROR:", err);
+      console.error("🔥 ERROR:", err);
       alert("❌ Error saving product!");
     } finally {
       setIsSubmitting(false);
@@ -93,15 +113,12 @@ const AddProducts = () => {
       <div className="addProductForm">
         <h2>{product ? "Edit Product" : "Add Product"}</h2>
 
-        {/* IMAGE UPLOAD */}
         <div className="addImg">
           <input type="file" accept="image/*" onChange={handleChange} />
-          {preview && <img src={preview} alt="Preview"  />}
+          {preview && <img src={preview} alt="Preview" />}
         </div>
 
-        <h3>Product Image</h3>
 
-        {/* FORM INPUTS */}
         <div className="addProductInput">
           <label>Name:</label>
           <input type="text" name="Name" value={formData.Name} onChange={handleChange} />
@@ -127,9 +144,8 @@ const AddProducts = () => {
           <textarea name="des" value={formData.des} onChange={handleChange}></textarea>
         </div>
 
-        {/* BUTTON */}
         <button
-          className="addBtn"
+          className="addbut"
           onClick={handleSubmit}
           disabled={isSubmitting}
         >

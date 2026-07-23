@@ -4,10 +4,9 @@
   align-items: center;
   flex-direction: column;
   color: #333;
-  width: 100vw;
-  min-height: 100vh;
+ padding: 10px;
+ 
   background: #fff; 
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -18,10 +17,10 @@
   background-color: #FFCADD;
   border: none;
   border-radius: 16px;
+  padding: 20px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px 40px;
-  max-width: 400px;
-  width: 100%;
+  max-width: 350px;
+  max-height: 500px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -31,14 +30,14 @@
 }
 
 .heading h2 {
-  font-size: 26px;
+  font-size: 23px;
   font-weight: 600;
   color: #C2185B;
   margin-bottom: 25px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 }
 
-.upload {
+ .upload {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,32 +45,46 @@
   background-color: white;
   border: 2px dashed #ccc;
   border-radius: 10px;
-  width: 305px; 
+  width: 200px; 
   height: 160px;
   margin-bottom: 15px;
   transition: all 0.3s ease;
-}
+} 
+
+
 
 .upload:hover {
   border-color: #C2185B;
   background-color: #FFF4F8;
 }
 
-.upload input {
+.upload input[type="file"] {
+  text-align: center;
+  color: #767575;
+  font-size:12px;
+  font-weight: bold;
+  padding-left:60px;
+}
+
+.upload input[type="file"]::file-selector-button {
   cursor: pointer;
+  color:white;
+  border:none;
+  background-color:#C2185B;
+  height: 20px;
+  border-radius: 10px;
 }
 
 .reviewsInput {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  gap: 15px;
+  gap: 10px;
 }
 
 .reviewsInput input,
 .reviewsInput textarea {
-  width: 320px; 
+  width: 220px; 
   border-radius: 10px;
   border: 1px solid #ddd;
   padding: 12px 14px;
@@ -89,7 +102,7 @@
 }
 
 .reviewsInput textarea {
-  height: 100px;
+  height: 80px;
   resize: none;
 }
 
@@ -101,7 +114,7 @@
 }
 
 .submit button {
-  width: 320px; 
+  width: 220px; 
   padding: 12px;
   color: white;
   font-weight: 600;

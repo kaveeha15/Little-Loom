@@ -90,9 +90,11 @@ const Cart = () => {
 
       <div className="pro-paid">
         <h2>To be paid</h2>
-        <p className="pro-Text">Total Items: {cartItems.length}</p>
-        <p className="pro-Text">Delivery Charge: Rs.100</p>
-        <p className="pro-Text">Total Amount: Rs.{totalPrice + 100}</p>
+       <p className="pro-Text">
+            Total Items: {cartItems.reduce((acc, item) => acc + Number(item.quantity), 0)}
+      </p>
+        <p className="pro-Text">Delivery Charge: Rs.500</p>
+        <p className="pro-Text">Total Amount: Rs.{totalPrice + 500}</p>
         <button
           className="buyBut"
           onClick={() => {

@@ -7,6 +7,8 @@ import { db } from "../config/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { WishlistContext } from "../Context/WishlistContext";
+import search from  '../assets/images/search.png'
+
 
 const AllProducts = () => {
   const navigate = useNavigate();
@@ -27,13 +29,25 @@ const AllProducts = () => {
         const collRef = collection(db, "products");
         let q = collRef;
 
+        //debug
+        console.log("🔍 URL Category:", category);
+        console.log("🔍 Category type:", typeof category);
         // Add category filter if present
-        if (category) {
-          q = query(collRef, where("category", "==", category));
-        }
+        // ✅ Fetch ALL products first, then filter (handles both "Category" and "category")
+const snap = await getDocs(collRef);
+let products = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
-        const snap = await getDocs(q);
-        let products = snap.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+// ✅ Filter by category (handles both cases)
+if (category) {
+  products = products.filter((item) => {
+    const itemCategory = item.Category || item.category;
+    return itemCategory === category;
+  });
+}
+
+        // ⚡ DEBUG
+        console.log("📦 Products found:", products.length);
+        console.log("📦 Products:", products);
 
         // Apply search filter locally
         if (searchQuery) {
@@ -91,16 +105,17 @@ const AllProducts = () => {
 
         <div className="proMenu1">
           <div className="search-container">
+          <div className="searchBar">
             <input
               type="text"
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-bar"
+             
             />
-            <img src={assets.searchIcon} alt="Search" className="search-icon" />
+                <img src={search} alt="search" />
           </div>
-
+         </div>
           <div className="pro-details">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((item) => (
@@ -114,7 +129,7 @@ const AllProducts = () => {
                 >
                   <img
                     className="boxClor"
-                    src={item.image || assets.defaultImage}
+                    src={item.Image || assets.defaultImage}
                     alt={item.Name}
                   />
 

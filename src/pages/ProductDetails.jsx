@@ -59,7 +59,7 @@ const ProductDetails = () => {
       <div className="productDetails">
         <div className="prodetailsImg">
           <img
-            src={selectProduct.image ?? assets.placeholder}
+            src={selectProduct.Image ?? assets.placeholder}
             alt={selectProduct.Name ?? "Product"}
           />
         </div>
@@ -94,7 +94,7 @@ const ProductDetails = () => {
               >
                 <img
                   className="boxClor"
-                  src={item.image ?? assets.placeholder}
+                  src={item.Image ?? assets.placeholder}
                   alt={item.Name ?? "Product"}
                 />
                 <div

@@ -1,7 +1,6 @@
 .addProductContainer{
     display: flex;
     justify-content: center;
-    
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;   
 }
 .addProductForm{
@@ -13,34 +12,68 @@
   border:2px solid rgb(196, 188, 188);
   border-radius: 10px;
   width: 400px;
-  height: 700px;
+  height: 650px;
 }
 .addProductForm h2{
     font-size: 25px;
+    color:#C2185B;
     font-family:unset;
 }
+
+/* ===== UPDATED: Image Upload Area ===== */
 .addImg{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
+  gap: 8px;
   padding: 10px;
-max-height: 100px;
-  background-color:white;
+  width: 350px;              /* ⚡ Fixed width */
+  height: 210px;             /* ⚡ Fixed height */
+  background-color: white;
   border: 2px dashed #ccc;
   border-radius: 10px;
- 
   transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
+.addImg input[type="file"] {
+  text-align: center;
+  color: #767575;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 60px;
+  flex-shrink: 0;             /* ⚡ Input එක shrink වෙන්නේ නෑ */
+}
+
+.addImg input[type="file"]::file-selector-button {
+  cursor: pointer;
+  color: white;
+  border: none;
+  background-color: #C2185B;
+  height: 20px;
+  border-radius: 10px;
+}
+
+/* ⚡ Image preview - upload area එකට fit වෙනවා */
 .addImg img{
-    max-height: 100px;
+  width: 100%;
+  height: 100%;
+  max-height: 130px;          /* ⚡ Image max height */
+  object-fit: contain;         /* ⚡ Ratio නරක් නොවී fit වෙනවා */
+  border-radius: 6px;
 }
+
 .addImg:hover{
-    border-color: #999;
+  border-color: #C2185B;
 }
+
 .addImg input{
- cursor: pointer;
+  cursor: pointer;
 }
+
+/* ===== ALL OTHER STYLES - වෙනස් කලේ නෑ ===== */
 .addProductInput{
     display: flex;
     align-items:left;
@@ -52,10 +85,16 @@ max-height: 100px;
 }
 .addProductInput input,textarea,option{
     border-radius:5px;
-    border:none;
+     border: 1px solid #ddd;
      width: 350px;
      height: 30px;
      margin: 5px;
+}
+.addProductInput input:focus,.addProductInput select:focus,
+.addProductInput textarea:focus {
+  border-color: #C2185B;
+  box-shadow: 0 0 6px rgba(194, 24, 91, 0.3);
+  outline: none;
 }
 .addProductInput textarea{
      height:80px;
@@ -63,21 +102,24 @@ max-height: 100px;
  select:hover{
     cursor: pointer;
   background-color: #FFCADD;
-   
 }
-.addBtn{
-    border-radius: 15px;
- background-color:#C2185B;
-}
-.addBtn p{
+.addbut{
     display: flex;
-    color: white;
-    align-items: center;
     justify-content: center;
-    font-family:unset;
-    font-weight: bold;
+    align-items: center;
+    border-radius: 15px;
+  width: 110px;
+  height: 30px;
+  color: white;
+ background-color:#C2185B;
+ font-size: 15px;
+ font-family: unset;
+ margin: 10px;
 }
-.addBtn:hover{
+
+.addbut:hover{
     cursor: pointer;
-    
+    background-color: rgb(249, 142, 213);
+    color: white;
+  
 }

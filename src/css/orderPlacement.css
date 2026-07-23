@@ -5,14 +5,13 @@
   align-items: center;         
   padding: 20px 10px;
   background-color: #f9f9f9;
-  min-height: 100vh;
            
 }
 
 .orderForm {
  
   background-color: #FFCADD;
-  padding: 15px;
+  padding:30px;
   border-radius: 10px;
   width: 100%;
   max-width: 350px;
@@ -21,12 +20,31 @@
 
 .orderHeading h2 {
   font-size: 22px;
+  font-weight: bold;
+   color: #C2185B;
   margin-bottom: 15px;
   text-align: center;
 }
+/* ===== ORDER SUMMARY SECTION ===== */
+.orderSummary {
+  background-color: #E091A8;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 15px 30px;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
+.orderSummary .summary-line {
+  margin: 8px 0;
+  font-size: 16px;
+  font-weight:bold;
+  text-align: center;
+  color: #4a2a35;
+}
 .billingDetails h3 {
   font-size: 18px;
+  color: rgb(127, 128, 128);
   margin-bottom: 10px;
 }
 
@@ -39,20 +57,26 @@
 .inputContainer input,
 .billingDetails input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 6px 6px;
   margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 10px;
   box-sizing: border-box;
 }
 
+
+.billingDetails :focus {
+  border-color: #C2185B;
+  box-shadow: 0 0 6px rgba(194, 24, 91, 0.3);
+  outline: none;
+}
 input.error {
-  border-color: #a31a2c;
+  border-color: #a10d21;
 }
 
 .error-text {
-  color: #a31a2c;
+  color: #991224;
   font-size: 10px;
   margin-top: -4px;
   display: block;
@@ -78,15 +102,22 @@ input.error {
   height: auto;
 }
 
+.payMethod input[type="radio"] {
+ accent-color: #C2185B;
+}
+
 .checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
   background-color: #C2185B;
   color: #fff;
   text-align: center;
   border-radius: 8px;
-  padding: 5px;
+ height: 30px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   transition: background 0.3s;
 }
 

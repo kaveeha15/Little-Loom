@@ -30,11 +30,11 @@ const Testimonial = () => {
       <div className="review-cardsGrid">
         {userReview.map((testimonial, index) => (
           <div className="review-card" key={testimonial.id}>
-            <img
-              src={testimonial.image}
-              alt="PHOTO"
-              className="review-image"
-            />
+                <img
+                  src={testimonial.fileURL}     
+                  alt={testimonial.name}
+                  className="review-image"
+                />
             <h3 className="review-name">{testimonial.name}</h3>
             <p className="review-text">{testimonial.feedback}</p>
           </div>

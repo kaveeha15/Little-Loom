@@ -8,7 +8,7 @@
 }
 
 /* Inner container for items */
-.item {
+.itm {
   display: flex;
   flex-wrap: wrap;
   gap: 80px;

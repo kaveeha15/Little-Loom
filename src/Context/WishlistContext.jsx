@@ -77,7 +77,7 @@ export const WishlistProvider = ({ children }) => {
       userId,
       productId: product.id,
       name: product.Name,
-      image: product.image || assets.defaultImage,
+      image: product.Image || assets.defaultImage,
       price: product.Price,
       stock: product.Stock ?? 0,
     });
