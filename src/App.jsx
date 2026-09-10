@@ -67,7 +67,7 @@ import useAuth from './hooks/useAuth';
 // User Pages
 import SignIn from './pages/signIn';
 import SignUp from './pages/signUp';
-import Reviews from './pages/reviews';
+import Reviews from "./pages/Reviews"
 import OrderPlacement from './pages/orderPlacement';
 import Home from './pages/Home';
 import AllProduct from './pages/AllProducts';
