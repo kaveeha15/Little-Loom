@@ -78,8 +78,8 @@ import UserProfile from './pages/UserProfile';
 
 // Admin Pages
 import RootLayout from './layout/rootLayout';
-import TotalOrders from './pages/admin/TotalOrders';
-import TotalUsers from './pages/admin/TotalUsers';
+import TotalOrders from './pages/admin/totalOrders'
+import TotalUsers from './pages/admin/totalUsers';
 import AddProducts from './pages/admin/addProducts';
 import AllProductsAdmin from './pages/admin/allProducts';
 
