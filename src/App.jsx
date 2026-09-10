@@ -71,7 +71,7 @@ import Reviews from "./pages/Reviews"
 import OrderPlacement from './pages/orderPlacement';
 import Home from './pages/Home';
 import AllProduct from './pages/AllProducts';
-import Cart from './pages/Cart';
+import Cart from './pages/cart'
 import ProductDetails from './pages/ProductDetails';
 import Wishlist from './pages/Wishlist';
 import UserProfile from './pages/UserProfile';
